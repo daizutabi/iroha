@@ -19,8 +19,8 @@ def get_version(package):
 setup(
     name='iroha',
     version=get_version('iroha'),
-    description='Add and Sub',
-    url='https://github.com/daizutabi/irohapj',
+    description='Python Packaging Tutorial',
+    url='https://github.com/daizutabi/iroha',
     author='daizutabi',
     author_email='daizutabi@gmail.com',
     license='MIT',
@@ -34,7 +34,6 @@ setup(
     },
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Environment :: Console',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
