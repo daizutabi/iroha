@@ -7,20 +7,20 @@
 
 ### ソースディストリビューション
 
-ソースディストリビューションを作成する．`irohapj`ディレクトリ下で以下を実行する．
+ソースディストリビューションを作成する．`iroha`ディレクトリ下で以下を実行する．
 
 ```bash
-(irohaenv) > python setup.py sdist
+(iroha) > python setup.py sdist
 ```
 
 `dist`ディレクトリが新しく作られて，その中に`iroha-0.1.0.tar.gz`が格納された．
 
 ### Wheels
 
-ビルドされたwheelを作成する．`irohapj`ディレクトリ下で以下を実行する．
+ビルドされたwheelを作成する．`iroha`ディレクトリ下で以下を実行する．
 
 ```bash
-(irohaenv) > python setup.py bdist_wheel
+(iroha) > python setup.py bdist_wheel
 ```
 
 `build`ディレクトリが新しく作られて，いろいろなファイルが生成された．wheel自体は，`dist`下に`iroha-0.1.0-py3-none-any.whl`の名前で格納された．
@@ -61,19 +61,19 @@ password: <password>
 
 ### アップロード
 
-アップロードするには[twine](https://github.com/pypa/twine)を使う．twineは他のプロジェクトでも使うので，専用の環境`twine`下にインストールする．こうすることで，`iroha`プロジェクトに直接関係のない`twine`やそれが依存するパッケージで`irohaenv`環境が汚染されることを防ぐ．
+アップロードするには[twine](https://github.com/pypa/twine)を使う．twineは他のプロジェクトでも使うので，専用の環境`twine`下にインストールする．こうすることで，`iroha`プロジェクトに直接関係のない`twine`やそれが依存するパッケージで`iroha`環境が汚染されることを防ぐ．
 
 !!! Note
     `python setup.py sdist`，`python setup.py bdist_wheel`は`twine`環境下で実行することができる．
 
 
 ```bash
-(irohaenv) > conda create -n twine
-(irohaenv) > activate twine
+(iroha) > conda create -n twine
+(iroha) > activate twine
 (twine) > conda install twine -c conda-forge
 ```
 
-さて，実際にアップロードしよう．`irohapj`ディレクトリ下で以下を実行する．
+さて，実際にアップロードしよう．`iroha`ディレクトリ下で以下を実行する．
 
 ```bash
 (twine) > twine upload dist/*
