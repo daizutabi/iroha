@@ -22,7 +22,7 @@ condaパッケージを作成するために必要な`conda-build`パッケー�
 
 
 !!! Note
-    実行の最後で「アクセスが拒否されました。」というメッセージが表示されるが，ビルド自体はうまくいっている．
+    実行の最後で「アクセスが拒否されました。」というメッセージが表示される場合があるが，ビルド自体はうまくいっている．
 
 `iroha`ディレクトリが作成されて，その下に`meya.yml`ファイルが格納された．次に２つの実行ファイルをダウンロードして同じディレクトリ下に保存する．
 
@@ -135,10 +135,10 @@ Python Packaging Tutorial
 [pypi-v-link]: https://pypi.python.org/pypi/iroha
 [anaconda-v-image]: https://anaconda.org/daizutabi/iroha/badges/version.svg
 [anaconda-v-link]: https://anaconda.org/daizutabi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/irohapj.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/irohapj
+[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
+[travis-link]: https://travis-ci.org/daizutabi/iroha
 ```
 
-`git push`後に[レポジトリのページ](https://github.com/daizutabi/irohapj)を確認するとバッジが表示されている．
+`git push`後に[レポジトリのページ](https://github.com/daizutabi/iroha)を確認するとバッジが表示されている．
 
 ![バッジ](img/badge2.png)

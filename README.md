@@ -12,5 +12,5 @@ Python Packaging Tutorial
 [pypi-v-link]: https://pypi.python.org/pypi/iroha
 [anaconda-v-image]: https://anaconda.org/daizutabi/iroha/badges/version.svg
 [anaconda-v-link]: https://anaconda.org/daizutabi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/irohapj.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/irohapj
+[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
+[travis-link]: https://travis-ci.org/daizutabi/iroha
