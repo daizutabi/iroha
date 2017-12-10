@@ -11,17 +11,16 @@
 レポジトリをローカルにクローンする．適当なディレクトリに移動し，
 
 ```bash
-(iroha) > cd C:\Users\daizu\Documents\Python
+(iroha) > cd C:\Users\daizu\Python
 (iroha) > git clone https://github.com/daizutabi/iroha.git
 ```
 
-とする．`iroha`ディレクトリが作成された．
+とする．`C:\Users\daizu\Documents\Python\iroha`ディレクトリが作成された．
 
 
 ## パッケージの作成
 
-まずは根幹となるパッケージを作っていこう．ディレクトリ構造は以下の通りである．同時に`.gitignore`も作っておく． 各ファイルの内容は，GitHubの[irohaレポジトリ](https://github.com/daizutabi/iroha
-/tree/master/iroha)を参照されたい．
+まずは根幹となるパッケージを作っていこう．ディレクトリ構造は以下の通りである．同時に`.gitignore`も作っておく． 各ファイルの内容は，GitHubの[irohaレポジトリ](https://github.com/daizutabi/iroha/tree/master/iroha)を参照されたい．
 
 ```
 + iroha
@@ -51,10 +50,8 @@
 プロジェクトをパッケージングしてインストールするために必要な設定ファイルを作成していく．詳しくは，[「Python Packaging User Guide」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)の[「プロジェクトのパッケージングと配布」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html#id4)を参照されたい．今回は以下の2つのファイルを準備した．
 
 
-* [`setup.py`](https://github.com/daizutabi/iroha
-/blob/master/setup.py)
-* [`MANIFEST.in`](https://github.com/daizutabi/iroha
-/blob/master/MANIFEST.in)
+* [`setup.py`](https://github.com/daizutabi/iroha/blob/master/setup.py)
+* [`MANIFEST.in`](https://github.com/daizutabi/iroha/blob/master/MANIFEST.in)
 
 
 ## 作業用にローカルにインストール
