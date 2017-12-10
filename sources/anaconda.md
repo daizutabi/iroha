@@ -29,6 +29,9 @@ condaパッケージを作成するために必要な`conda-build`パッケー�
 * [`build.sh`](https://conda.io/docs/_downloads/build1.sh)
 * [`bld.bat`](https://conda.io/docs/_downloads/bld.bat)
 
+!!! Note
+    `build.sh`，`bld.bat`は必要なくなったようだ．
+
 パッケージをビルドする．
 
 ```bash
