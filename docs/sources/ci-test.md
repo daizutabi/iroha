@@ -5,11 +5,11 @@
 
 ## 準備
 
-Travis CIにGitHubアカウントでログインする．画面右上のユーザ名のメニューから[Accounts](https://travis-ci.org/profile)を選択する．レポジトリ一覧が表示されるので，`irohapj`レポジトリをビルド可能状態にする．
+Travis CIにGitHubアカウントでログインする．画面右上のユーザ名のメニューから[Accounts](https://travis-ci.org/profile)を選択する．レポジトリ一覧が表示されるので，`iroha`レポジトリをビルド可能状態にする．
 
-![Build enable](img/enable.png) daizutabi/irohapj
+![Build enable](img/enable.png) daizutabi/iroha
 
-ローカルの`irohapj`ディレクトリ下に`.travis.yml`ファイルを作成し，以下の内容で保存する．
+ローカルの`iroha`プロジェクトディレクトリ下に`.travis.yml`ファイルを作成し，以下の内容で保存する．
 
 ```yaml
 language: python
@@ -17,7 +17,7 @@ language: python
 
 ## ビルトが成功するまで
 
-`git push`する．するとTravis CIのページが自動で切り替わり，ビルド処理を始めたことがわかるだろう．`python 2.7`といった文字列が見受けられる．しばらくすると，ビルドが失敗に終わったことが通知される．何も設定していないので当然だ．Job logを見ると，`requirements.txt`がないことに警告が出ている模様だ．`requirements.txt`には依存パッケージを記述するようなので，以下の内容のファイルを`irohapj`ディレクト下に`requirements.txt`の名前で保存しておく．
+`git push`する．するとTravis CIのページが自動で切り替わり，ビルド処理を始めたことがわかるだろう．`python 2.7`といった文字列が見受けられる．しばらくすると，ビルドが失敗に終わったことが通知される．何も設定していないので当然だ．Job logを見ると，`requirements.txt`がないことに警告が出ている模様だ．`requirements.txt`には依存パッケージを記述するようなので，以下の内容のファイルを`iroha`ディレクト下に`requirements.txt`の名前で保存しておく．
 
 ```text
 click
@@ -77,10 +77,10 @@ Python Packaging Tutorial
 
 [pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
 [pypi-v-link]: https://pypi.python.org/pypi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/irohapj.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/irohapj
+[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
+[travis-link]: https://travis-ci.org/daizutabi/iroha
 ```
 
-`git push`後に[レポジトリのページ](https://github.com/daizutabi/irohapj)を確認するとバッジが表示されている．
+`git push`後に[レポジトリのページ](https://github.com/daizutabi/iroha)を確認するとバッジが表示されている．
 
 ![バッジ](img/badge.png)

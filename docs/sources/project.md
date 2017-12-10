@@ -15,7 +15,7 @@
 (iroha) > git clone https://github.com/daizutabi/iroha.git
 ```
 
-とする．`C:\Users\daizu\Documents\Python\iroha`ディレクトリが作成された．
+とする．`C:\Users\daizu\Python\iroha`ディレクトリが作成された．
 
 
 ## パッケージの作成
@@ -101,7 +101,7 @@ C:\Users\daizu\Miniconda3\envs\iroha\Scripts\iroha.exe
 (iroha) > python
 >>> import iroha
 >>> iroha.__file__
-'C:\\Users\\daizu\\Documents\\Python\\iroha\\iroha\\__init__.py'
+'C:\\Users\\daizu\\Python\\iroha\\iroha\\__init__.py'
 ```
 
 インストールといっても，今回は作業用にインストールしたので，別の場所にコピーが作成されているのではなく，`iroha`ディレクトリ以下の元のファイルがそのまま使われている．`sys.path`を見てみよう．
@@ -116,7 +116,7 @@ C:\Users\daizu\Miniconda3\envs\iroha\DLLs
 C:\Users\daizu\Miniconda3\envs\iroha\lib
 C:\Users\daizu\Miniconda3\envs\iroha
 C:\Users\daizu\Miniconda3\envs\iroha\lib\site-packages
-c:\users\daizu\documents\python\iroha
+c:\users\daizu\python\iroha
 ```
 
 `sys.path`の最後に作業ディレクトリが追加されている．先ほどと同じように`iroha`パッケージをアンインストールすると，`sys.path`から`iroha`パッケージへの参照がなくなる．

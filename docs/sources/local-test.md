@@ -12,10 +12,10 @@
 !!! Note
     `conda install pytest`のみだと，Python 3.5がインストールされてしまったので，pytestの前にpythonをインストールしている．
 
-`irohapj`のディレクトリ構造は以下のようになっていた．
+`iroha`のディレクトリ構造は以下のようになっていた．
 
 ```
-+ irohapj
++ iroha
     + iroha
         + add
         + data
@@ -28,7 +28,7 @@
 テストディレクトリ`tests`の配置方法は２つある．一つは，`iroha`パッケージのサブパッケージとする方法である．この場合，テストコードもパッケージ本体の中に含まれていて，`pip install`時に`iroha`パッケージとともに配布される．
 
 ```
-+ irohapj
++ iroha
     + iroha
         + add
         + data
@@ -44,7 +44,7 @@
 もう一つは，`iroha`パッケージと並列に配置する方法である．この場合`tests`はパッケージではなく，テストスクリプトをまとめるフォルダである．テストコードはパッケージと一緒に配布されず，ローカルファイルやレポジトリ上だけで見ることができる．
 
 ```
-+ irohapj
++ iroha
     + iroha
         + add
         + data
@@ -62,7 +62,7 @@
 今回は後者の方法を用いる．２つのテストファイルを作成する．
 
 ```python
-# irohapj/tests/test_add.py
+# iroha/tests/test_add.py
 from iroha.add.calc import calc
 
 
@@ -71,7 +71,7 @@ def test_add_calc():
 ```
 
 ```python
-# irohapj/tests/test_sub.py
+# iroha/tests/test_sub.py
 from iroha.sub.calc import calc
 
 
@@ -79,7 +79,7 @@ def test_sub_calc():
     assert calc(1, 2) == -1
 ```
 
-`iroha`パッケージを使えるようにするために，ローカルに「開発モード」でインストールする．`irohapj`ディレクトリ下で以下を実行する．
+`iroha`パッケージを使えるようにするために，ローカルに「開発モード」でインストールする．`iroha`ディレクトリ下で以下を実行する．
 
 ```bash
 (pytest) > pip install -e .
@@ -91,7 +91,7 @@ def test_sub_calc():
 (pytest) > pytest
 ============================= test session starts =============================
 platform win32 -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
-rootdir: c:\Users\daizu\Documents\Python\irohapj, inifile:
+rootdir: c:\Users\daizu\Python\iroha, inifile:
 plugins: hypothesis-3.38.5
 collected 2 items
 
