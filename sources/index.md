@@ -13,6 +13,7 @@ Pythonパッケージの作り方を説明する．単にパッケージを作�
 * [How To Package Your Python Code](https://python-packaging.readthedocs.io/en/latest/minimal.html)
 * [Python Packaging User Guide](https://packaging.python.org/)
 * [Python Packaging User Guide (日本語訳)](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)
+* [Building conda packages with conda skeleton](https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#building-conda-packages-with-conda-skeleton)
 
 ## 用語
 
