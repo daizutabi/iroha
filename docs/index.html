@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#python">Pythonパッケージの作り方</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">はじめに</a></li>
+        
+            <li><a class="toctree-l3" href="#url">参考URL</a></li>
+        
+            <li><a class="toctree-l3" href="#_2">用語</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="project/">プロジェクトの作成</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="pypi/">PyPIへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="local-test/">ローカルでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="ci-test/">CIでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="anaconda/">Anacondaへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="python">Pythonパッケージの作り方</h1>
+<p>更新日：2017/12/10</p>
+<h2 id="_1">はじめに</h2>
+<p>Pythonパッケージの作り方を説明する．単にパッケージを作るだけでなく，自作のパッケージをPyPI，Anaconda.orgに公開することを目指す．</p>
+<h2 id="url">参考URL</h2>
+<p>パッケージを公開するために，多くのサイトを参照したが，特に，以下のサイトに依るところが大きい．これらを参照すれば，より有益な情報を得ることができるだろう．</p>
+<ul>
+<li><a href="https://python-packaging.readthedocs.io/en/latest/minimal.html">How To Package Your Python Code</a></li>
+<li><a href="https://packaging.python.org/">Python Packaging User Guide</a></li>
+<li><a href="http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html">Python Packaging User Guide (日本語訳)</a></li>
+</ul>
+<h2 id="_2">用語</h2>
+<p>ここで用いる単語を明確化しておく．</p>
+<ul>
+<li>環境：Anacondaの仮想環境．<code>conda create -n &lt;環境名&gt;</code>で作られる．</li>
+<li>パッケージ：PyPIやAnaconda Cloudに公開するPythonコードの集合．Pythonスクリプト内で<code>import &lt;package&gt;</code>と記述してインポートされる．</li>
+<li>プロジェクト：上記のパッケージ自体と，それをPyPIやAnaconda Cloudに公開するために必要となるファイル（設定ファイル）やディレクトリ（ドキュメントやテスト）の集合．文脈によって，これを「パッケージ」や「ディストリビューション」と呼んだりするが，ここでは，「プロジェクト」と呼ぶことにする．</li>
+</ul>
+<p>それぞれの具体的な名前を以下の通りとする．</p>
+<ul>
+<li>環境名：<code>iroha</code></li>
+<li>パッケージ：<code>iroha</code></li>
+<li>プロジェクト：<code>iroha</code></li>
+</ul>
+<p>全部同じ名前である．区別が必要なときには，<code>iroha</code>環境，<code>iroha</code>パッケージ，<code>iroha</code>プロジェクトと明記する．</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="environment/" class="btn btn-neutral float-right" title="Python実行環境">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="environment/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="./js/theme.js"></script>
+      <script src="./search/require.js"></script>
+      <script src="./search/search.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.17.2
+Build Date UTC : 2017-12-10 11:28:25
+-->

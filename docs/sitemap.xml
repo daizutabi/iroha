@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//environment/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//project/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//pypi/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//local-test/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//ci-test/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//anaconda/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://daizutabi.github.io/iroha//ci-deploy/</loc>
+     <lastmod>2017-12-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

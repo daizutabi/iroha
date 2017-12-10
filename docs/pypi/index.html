@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>PyPIへのアップロード - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "PyPI\u3078\u306e\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9";
+    var mkdocs_page_input_path = "pypi.md";
+    var mkdocs_page_url = "/pypi/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../project/">プロジェクトの作成</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">PyPIへのアップロード</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#pypi">PyPIへのアップロード</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">ディストリビューションの作成</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">アップロード</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../local-test/">ローカルでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-test/">CIでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../anaconda/">Anacondaへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>PyPIへのアップロード</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="pypi">PyPIへのアップロード</h1>
+<h2 id="_1">ディストリビューションの作成</h2>
+<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>に公開するために，プロジェクトのディストリビューションを作る．</p>
+<h3 id="_2">ソースディストリビューション</h3>
+<p>ソースディストリビューションを作成する．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<pre><code class="bash">(iroha) &gt; python setup.py sdist
+</code></pre>
+
+<p><code>dist</code>ディレクトリが新しく作られて，その中に<code>iroha-0.1.0.tar.gz</code>が格納された．</p>
+<h3 id="wheels">Wheels</h3>
+<p>ビルドされたwheelを作成する．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<pre><code class="bash">(iroha) &gt; python setup.py bdist_wheel
+</code></pre>
+
+<p><code>build</code>ディレクトリが新しく作られて，いろいろなファイルが生成された．wheel自体は，<code>dist</code>下に<code>iroha-0.1.0-py3-none-any.whl</code>の名前で格納された．</p>
+<h2 id="_3">アップロード</h2>
+<h3 id="_4">アカウントの作成</h3>
+<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>にアップロードするためには事前にユーザーアカウントを作成しておく必要がある．テスト用の<a href="https://testpypi.python.org/pypi">Test PyPI</a>にアップロードする場合は，別途ユーザーアカウントが必要である．それぞれの登録フォームは以下である．</p>
+<ul>
+<li><a href="https://pypi.python.org/pypi?%3Aaction=register_form">PyPIのユーザ登録</a></li>
+<li><a href="https://testpypi.python.org/pypi?%3Aaction=register_form">Test PyPIのユーザ登録</a></li>
+</ul>
+<p>ユーザー登録が終わったら，<code>~/.pypirc</code>を用意し，以下のように書く．</p>
+<pre><code>[distutils]
+index-servers =
+    pypi
+    testpypi
+
+[pypi]
+repository: https://upload.pypi.org/legacy/
+username: &lt;username&gt;
+password: &lt;password&gt;
+
+[testpypi]
+repository: https://test.pypi.org/legacy/
+username: &lt;username&gt;
+password: &lt;password&gt;
+</code></pre>
+
+<p><code>username</code>行および<code>password</code>行は省略してもよい。<code>twine</code>に<code>-u USERNAME</code>引数，<code>-p PASSWORD</code>引数を渡すか、単に要求されたときに入力すればよい．</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>pypiのrepository行は省略可能である．</p>
+</div>
+<h3 id="_5">アップロード</h3>
+<p>アップロードするには<a href="https://github.com/pypa/twine">twine</a>を使う．twineは他のプロジェクトでも使うので，専用の環境<code>twine</code>下にインストールする．こうすることで，<code>iroha</code>プロジェクトに直接関係のない<code>twine</code>やそれが依存するパッケージで<code>iroha</code>環境が汚染されることを防ぐ．</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>python setup.py sdist</code>，<code>python setup.py bdist_wheel</code>は<code>twine</code>環境下で実行することができる．</p>
+</div>
+<pre><code class="bash">(iroha) &gt; conda create -n twine
+(iroha) &gt; activate twine
+(twine) &gt; conda install twine -c conda-forge
+</code></pre>
+
+<p>さて，実際にアップロードしよう．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<pre><code class="bash">(twine) &gt; twine upload dist/*
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>最初のリリースの際にアップロード前にプロジェクトを明示的に登録する<code>twine register</code>は現在（2017/12）は不要になっている．</p>
+</div>
+<h3 id="pypi_1">PyPIからのインストール</h3>
+<p>PyPIからインストールできるかテストしてみよう．そのための一時的な環境<code>irohatest</code>を作る．この環境には<code>pip</code>自体がないのでインストールする．</p>
+<pre><code class="bash">(twine) &gt; conda create -n irohatest
+(twine) &gt; activate irohatest
+(irohatest) &gt; conda install pip
+(irohatest) &gt; pip freeze
+certifi==2017.11.5
+wincertstore==0.2
+</code></pre>
+
+<p>さきほどアップロードした<code>iroha</code>パッケージをインストールする．確実にリモートからダウンロードするためにキャッシュを無効にする．</p>
+<pre><code class="bash">(irohatest) &gt; pip install iroha --no-cache-dir
+Collecting iroha
+  Downloading iroha-0.1.1-py3-none-any.whl
+Collecting click (from iroha)
+  Downloading click-6.7-py2.py3-none-any.whl (71kB)
+    100% |████████████████████████████████| 71kB 1.1MB/s
+Installing collected packages: click, iroha
+Successfully installed click-6.7 iroha-0.1.1
+</code></pre>
+
+<p><code>click</code>パッケージも同時にインストールされていることがわかる．インストールされているパッケージを確認しておく．</p>
+<pre><code class="bash">(irohatest) &gt; pip freeze
+certifi==2017.11.5
+click==6.7
+iroha==0.1.1
+wincertstore==0.2
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>conda</code>でパッケージを管理している場合には，<code>click</code>がpipでインストールされるのを望ましく思わないかもしれない．その場合には，事前に<code>conda install click</code>を実行しよう．</p>
+</div>
+<p><code>iroha</code>パッケージは作業ディレクトリのものではなく，<code>irohatest</code>環境の<code>site-packages</code>下にダウンロードされたものが使われている．</p>
+<pre><code class="python">(irohatest) &gt; python
+&gt;&gt;&gt; import iroha
+&gt;&gt;&gt; iroha.__file__
+'C:\\Users\\daizu\\Miniconda3\\envs\\irohatest\\lib\\site-packages\\iroha\\__init__.py'
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../local-test/" class="btn btn-neutral float-right" title="ローカルでのテスト">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../project/" class="btn btn-neutral" title="プロジェクトの作成"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../project/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../local-test/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>CIでのテスト - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "CI\u3067\u306e\u30c6\u30b9\u30c8";
+    var mkdocs_page_input_path = "ci-test.md";
+    var mkdocs_page_url = "/ci-test/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../project/">プロジェクトの作成</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../pypi/">PyPIへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../local-test/">ローカルでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">CIでのテスト</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">継続的インテグレーションでのテスト</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_2">準備</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">ビルトが成功するまで</a></li>
+        
+            <li><a class="toctree-l3" href="#_4">バッジをつけよう</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../anaconda/">Anacondaへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>CIでのテスト</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">継続的インテグレーションでのテスト</h1>
+<p>継続的インテグレーションツールとして，GitHubと連動する<a href="https://travis-ci.org/">Travis CI</a>を用いる．Travis CIがはじめてならば，まずは<a href="https://docs.travis-ci.com/user/getting-started/">Getting started</a>を一読しよう．以下では最低限の，少なくとテストがパスするまでの手順について説明する．</p>
+<h2 id="_2">準備</h2>
+<p>Travis CIにGitHubアカウントでログインする．画面右上のユーザ名のメニューから<a href="https://travis-ci.org/profile">Accounts</a>を選択する．レポジトリ一覧が表示されるので，<code>iroha</code>レポジトリをビルド可能状態にする．</p>
+<p><img alt="Build enable" src="../img/enable.png" /> daizutabi/iroha</p>
+<p>ローカルの<code>iroha</code>プロジェクトディレクトリ下に<code>.travis.yml</code>ファイルを作成し，以下の内容で保存する．</p>
+<pre><code class="yaml">language: python
+</code></pre>
+
+<h2 id="_3">ビルトが成功するまで</h2>
+<p><code>git push</code>する．するとTravis CIのページが自動で切り替わり，ビルド処理を始めたことがわかるだろう．<code>python 2.7</code>といった文字列が見受けられる．しばらくすると，ビルドが失敗に終わったことが通知される．何も設定していないので当然だ．Job logを見ると，<code>requirements.txt</code>がないことに警告が出ている模様だ．<code>requirements.txt</code>には依存パッケージを記述するようなので，以下の内容のファイルを<code>iroha</code>ディレクト下に<code>requirements.txt</code>の名前で保存しておく．</p>
+<pre><code class="text">click
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>iroha</code>パッケージが依存するパッケージは，<code>setup.py</code>内に記述していた．再度，<code>requirements.txt</code>にも同じ内容を書くのは冗長でないかと疑問を持つかもしれない．冗長を回避するために，<code>setup.py</code>が<code>requirements.txt</code>の内容を解析して自動で依存パッケージを指定することも可能である．</p>
+</div>
+<p>その他もろもろのドキュメントを読んでみると，Pythonのバージョン，インストール作業，および実行スクリプトを指定すればよいようだ．現時点での<code>.travis.yml</code>は以下のようになっている．</p>
+<pre><code class="yaml">language: python
+python:
+  - &quot;2.7&quot;
+  - &quot;3.4&quot;
+  - &quot;3.5&quot;
+  - &quot;3.6&quot;
+install:
+  - pip install -r requirements.txt
+script:
+  - pytest
+</code></pre>
+
+<p>もう一度<code>git push</code>する．pytestの実行までは進んだようだが，エラーで停止してしまった．どうやら<code>iroa</code>パッケージが見つからないらしい．<code>.travis.yml</code>の<code>install</code>のところまで処理が進んだとき，カレントディレクトリはプロジェクトのルートディレクトリになっているようなので，次のようにして自分自身を作業用としてインストールする．</p>
+<pre><code class="yaml">language: python
+(中略)
+install:
+  - pip install -r requirements.txt
+  - pip install -e .
+(後略)
+</code></pre>
+
+<p>再び<code>git push</code>する．今度はビルドに成功した．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>pip install -e .</code> 以外でパッケージにパスを通す方法は？</p>
+</div>
+<h2 id="_4">バッジをつけよう</h2>
+<p>ビルドに成功したのでGitHubレポジトリに <img alt="Build: Passing" src="../img/passing.svg" /> のバッジをつけよう．あわせてPyPIのバッジもつけておく．</p>
+<p><code>README.md</code>を以下の内容で保存する．</p>
+<pre><code class="markdown"># Iroha Project
+
+Python Packaging Tutorial
+
+---
+
+[![PyPI Version][pypi-v-image]][pypi-v-link]
+[![Build Status][travis-image]][travis-link]
+
+[pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
+[pypi-v-link]: https://pypi.python.org/pypi/iroha
+[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
+[travis-link]: https://travis-ci.org/daizutabi/iroha
+</code></pre>
+
+<p><code>git push</code>後に<a href="https://github.com/daizutabi/iroha">レポジトリのページ</a>を確認するとバッジが表示されている．</p>
+<p><img alt="バッジ" src="../img/badge.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../anaconda/" class="btn btn-neutral float-right" title="Anacondaへのアップロード">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../local-test/" class="btn btn-neutral" title="ローカルでのテスト"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../local-test/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../anaconda/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

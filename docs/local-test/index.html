@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>ローカルでのテスト - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u30ed\u30fc\u30ab\u30eb\u3067\u306e\u30c6\u30b9\u30c8";
+    var mkdocs_page_input_path = "local-test.md";
+    var mkdocs_page_url = "/local-test/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../project/">プロジェクトの作成</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../pypi/">PyPIへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">ローカルでのテスト</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">ローカルでのテスト</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-test/">CIでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../anaconda/">Anacondaへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>ローカルでのテスト</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">ローカルでのテスト</h1>
+<p>テストフレームワークは<a href="https://docs.pytest.org/en/latest/">pytest</a>を使う．専用の環境を作成しよう．</p>
+<pre><code class="bash">&gt; conda create -n pytest
+&gt; activate pytest
+(pytest) &gt; conda install python
+(pytest) &gt; conda install pytest
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>conda install pytest</code>のみだと，Python 3.5がインストールされてしまったので，pytestの前にpythonをインストールしている．</p>
+</div>
+<p><code>iroha</code>のディレクトリ構造は以下のようになっていた．</p>
+<pre><code>+ iroha
+    + iroha
+        + add
+        + data
+        + sub
+        - __init__.py
+        - common.py
+        - main.py
+</code></pre>
+
+<p>テストディレクトリ<code>tests</code>の配置方法は２つある．一つは，<code>iroha</code>パッケージのサブパッケージとする方法である．この場合，テストコードもパッケージ本体の中に含まれていて，<code>pip install</code>時に<code>iroha</code>パッケージとともに配布される．</p>
+<pre><code>+ iroha
+    + iroha
+        + add
+        + data
+        + sub
+        + tests
+            - __init__.py
+            - test_add.py
+        - __init__.py
+        - common.py
+        - main.py
+</code></pre>
+
+<p>もう一つは，<code>iroha</code>パッケージと並列に配置する方法である．この場合<code>tests</code>はパッケージではなく，テストスクリプトをまとめるフォルダである．テストコードはパッケージと一緒に配布されず，ローカルファイルやレポジトリ上だけで見ることができる．</p>
+<pre><code>+ iroha
+    + iroha
+        + add
+        + data
+        + sub
+        - __init__.py
+        - common.py
+        - main.py
+    + tests
+        - test_add.py
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上記の方法には限られないと思うが，多くのパッケージで上記２つのうち一つを採用しているようである．</p>
+</div>
+<p>今回は後者の方法を用いる．２つのテストファイルを作成する．</p>
+<pre><code class="python"># iroha/tests/test_add.py
+from iroha.add.calc import calc
+
+
+def test_add_calc():
+    assert calc(1, 2) == 3
+</code></pre>
+
+<pre><code class="python"># iroha/tests/test_sub.py
+from iroha.sub.calc import calc
+
+
+def test_sub_calc():
+    assert calc(1, 2) == -1
+</code></pre>
+
+<p><code>iroha</code>パッケージを使えるようにするために，ローカルに「開発モード」でインストールする．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<pre><code class="bash">(pytest) &gt; pip install -e .
+</code></pre>
+
+<p>テストを実行しよう．</p>
+<pre><code class="bash">(pytest) &gt; pytest
+============================= test session starts =============================
+platform win32 -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: c:\Users\daizu\Python\iroha, inifile:
+plugins: hypothesis-3.38.5
+collected 2 items
+
+tests\test_add.py .                                                      [ 50%]
+tests\test_sub.py .                                                      [100%]
+
+========================== 2 passed in 0.10 seconds ===========================
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ci-test/" class="btn btn-neutral float-right" title="CIでのテスト">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../pypi/" class="btn btn-neutral" title="PyPIへのアップロード"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../pypi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ci-test/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

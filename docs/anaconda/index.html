@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Anacondaへのアップロード - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Anaconda\u3078\u306e\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9";
+    var mkdocs_page_input_path = "anaconda.md";
+    var mkdocs_page_url = "/anaconda/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../project/">プロジェクトの作成</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../pypi/">PyPIへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../local-test/">ローカルでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-test/">CIでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Anacondaへのアップロード</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#anacondaorg">Anaconda.orgへのアップロード</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#conda">condaパッケージの作成</a></li>
+        
+            <li><a class="toctree-l3" href="#_1">ローカルにインストール</a></li>
+        
+            <li><a class="toctree-l3" href="#_2">オプションのステップ</a></li>
+        
+            <li><a class="toctree-l3" href="#anacondaorg_1">Anaconda.orgへのアップロード</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">バッジの追加</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Anacondaへのアップロード</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="anacondaorg">Anaconda.orgへのアップロード</h1>
+<p>いよいよ最後のタスクである．<code>iroha</code>パッケージをAnaconda Cloudで公開する． <a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html">Building conda packages with conda skeleton</a>を参照して一歩ずつ進めていこう．</p>
+<h2 id="conda">condaパッケージの作成</h2>
+<p>condaパッケージを作成するために必要な<code>conda-build</code>パッケージは，ルート環境下にしかインストールできない．同時に<code>m2-patch</code>もインストールする．</p>
+<pre><code class="bash">&gt; activate root
+(root) &gt; conda install m2-patch conda-build
+</code></pre>
+
+<p>パッケージを作成したいディレクトリに移動して，以下を実行する．</p>
+<pre><code class="bash">(root) &gt; conda skeleton pypi iroha
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>そのディレクトリにすでに<code>iroha</code>ディレクトリがあるとエラーが発生する．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>実行の最後で「アクセスが拒否されました。」というメッセージが表示される場合があるが，ビルド自体はうまくいっている．</p>
+</div>
+<p><code>iroha</code>ディレクトリが作成されて，その下に<code>meya.yml</code>ファイルが格納された．次に２つの実行ファイルをダウンロードして同じディレクトリ下に保存する．</p>
+<ul>
+<li><a href="https://conda.io/docs/_downloads/build1.sh"><code>build.sh</code></a></li>
+<li><a href="https://conda.io/docs/_downloads/bld.bat"><code>bld.bat</code></a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>build.sh</code>，<code>bld.bat</code>は必要なくなったようだ．</p>
+</div>
+<p>パッケージをビルドする．</p>
+<pre><code class="bash">(root) &gt; conda-build iroha
+</code></pre>
+
+<p>Windowsの場合，</p>
+<pre><code>C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
+</code></pre>
+
+<p>が作成される．</p>
+<h2 id="_1">ローカルにインストール</h2>
+<p><code>--use-local</code>フラッグを指定して<code>iroha</code>パッケージをインストールする．</p>
+<pre><code class="bash">(root) &gt; conda create -n conda-iroha
+(root) &gt; activate conda-iroha
+(conda-iroha) &gt; conda install --use-local iroha
+</code></pre>
+
+<p>依存パッケージ<code>click</code>とともに<code>iroha</code>パッケージがインストールされた．</p>
+<pre><code class="bash">(conda-iroha) &gt; conda list
+certifi                   2017.11.5        py36hb8ac631_0
+click                     6.7              py36hec8c647_0
+iroha                     0.1.3                    py36_0    local
+pip                       9.0.1            py36h226ae91_4
+python                    3.6.3                h3b118a2_4
+setuptools                36.5.0           py36h65f9e6e_0
+vc                        14                   h2379b0c_2
+vs2015_runtime            14.0.25123           hd4c4e62_2
+wheel                     0.30.0           py36h6c3ec14_1
+wincertstore              0.2              py36h7fe50ca_0
+</code></pre>
+
+<h2 id="_2">オプションのステップ</h2>
+<ul>
+<li>
+<p><a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-building-for-a-different-python-version">Optional—Building for a different Python version</a></p>
+</li>
+<li>
+<p><a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-converting-conda-package-for-other-platforms">Optional—Converting conda package for other platforms</a></p>
+</li>
+</ul>
+<h2 id="anacondaorg_1">Anaconda.orgへのアップロード</h2>
+<ol>
+<li>まだであれば，<a href="https://anaconda.org">Anaconda.org</a>でアカウントを作成する</li>
+<li><code>(root) &gt; conda install anaconda-client</code></li>
+<li><code>(root) &gt; anaconda login</code>でユーザー名とパスワードを入力する．</li>
+</ol>
+<p>先ほど作ったパッケージをアップロードする．</p>
+<pre><code class="bash">(root) &gt; anaconda upload C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
+</code></pre>
+
+<p><a href="https://anaconda.org">Anaconda.org</a>にアクセスすると，<code>iroha</code>パッケージの表示が見つかるはずである．</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ビルド成功時に同時にアップロードを行うためには，<code>conda config --set anaconda_upload yes</code>を実行する．</p>
+</div>
+<p>Anaconda.org経由でインストールしてみる．<code>daizutabi</code>チャネルを使う．</p>
+<pre><code class="bash">(root) conda remove -n conda-iroha --all
+(root) conda clean --all
+(root) &gt; conda create -n conda-iroha
+(root) &gt; activate conda-iroha
+(conda-iroha) &gt; conda install -c daizutabi iroha
+(conda-iroha) &gt; conda list
+certifi                   2017.11.5        py36hb8ac631_0
+click                     6.7              py36hec8c647_0
+iroha                     0.1.3                    py36_0    daizutabi
+pip                       9.0.1            py36h226ae91_4
+python                    3.6.3                h3b118a2_4
+setuptools                36.5.0           py36h65f9e6e_0
+vc                        14                   h2379b0c_2
+vs2015_runtime            14.0.25123           hd4c4e62_2
+wheel                     0.30.0           py36h6c3ec14_1
+wincertstore              0.2              py36h7fe50ca_0
+</code></pre>
+
+<h2 id="_3">バッジの追加</h2>
+<p>Anaconda.orgにパッケージを登録したことを示すバッジを<code>README.md</code>につける． <code>README.md</code>に記述を追加して以下のようになった．</p>
+<pre><code class="markdown"># Iroha Project
+
+Python Packaging Tutorial
+
+---
+
+[![PyPI Version][pypi-v-image]][pypi-v-link]
+[![Anaconda Version][anaconda-v-image]][anaconda-v-link]
+[![Build Status][travis-image]][travis-link]
+
+[pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
+[pypi-v-link]: https://pypi.python.org/pypi/iroha
+[anaconda-v-image]: https://anaconda.org/daizutabi/iroha/badges/version.svg
+[anaconda-v-link]: https://anaconda.org/daizutabi/iroha
+[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
+[travis-link]: https://travis-ci.org/daizutabi/iroha
+</code></pre>
+
+<p><code>git push</code>後に<a href="https://github.com/daizutabi/iroha">レポジトリのページ</a>を確認するとバッジが表示されている．</p>
+<p><img alt="バッジ" src="../img/badge2.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ci-deploy/" class="btn btn-neutral float-right" title="ビルドとデプロイの自動化">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ci-test/" class="btn btn-neutral" title="CIでのテスト"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../ci-test/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ci-deploy/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

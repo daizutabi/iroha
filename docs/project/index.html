@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>プロジェクトの作成 - Pythonパッケージの作り方</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306e\u4f5c\u6210";
+    var mkdocs_page_input_path = "project.md";
+    var mkdocs_page_url = "/project/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pythonパッケージの作り方</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../environment/">Python実行環境</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">プロジェクトの作成</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">プロジェクトの作成</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_2">パッケージの作成</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">設定ファイルの作成</a></li>
+        
+            <li><a class="toctree-l3" href="#_4">作業用にローカルにインストール</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../pypi/">PyPIへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../local-test/">ローカルでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-test/">CIでのテスト</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../anaconda/">Anacondaへのアップロード</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pythonパッケージの作り方</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>プロジェクトの作成</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">プロジェクトの作成</h1>
+<p>「プロジェクト」は，Pythonコード内で<code>import</code>されるパッケージに付加情報を合わせたものである．プロジェクトをGitHub上の一つのレポジトリに対応させる．まずは，GitHubで新規にレポジトリを作成する．名前はプロジェクト名と同じく<code>iroha</code>とする．新規作成の際には，</p>
+<ul>
+<li>[x] Initialize this repository with a README</li>
+<li>Add .gitignore: [None]</li>
+<li>Add a license: [MIT License]</li>
+</ul>
+<p>を選ぶ．</p>
+<p>レポジトリをローカルにクローンする．適当なディレクトリに移動し，</p>
+<pre><code class="bash">(iroha) &gt; cd C:\Users\daizu\Python
+(iroha) &gt; git clone https://github.com/daizutabi/iroha.git
+</code></pre>
+
+<p>とする．<code>C:\Users\daizu\Python\iroha</code>ディレクトリが作成された．</p>
+<h2 id="_2">パッケージの作成</h2>
+<p>まずは根幹となるパッケージを作っていこう．ディレクトリ構造は以下の通りである．同時に<code>.gitignore</code>も作っておく． 各ファイルの内容は，GitHubの<a href="https://github.com/daizutabi/iroha/tree/master/iroha">irohaレポジトリ</a>を参照されたい．</p>
+<pre><code>+ iroha
+    + iroha
+        + add
+            - __init__.py
+            - calc.py
+        + data
+            - numbers.txt
+        + sub
+            - __init__.py
+            - calc.py
+        - __init__.py
+        - common.py
+        - main.py
+    .gitignore
+</code></pre>
+
+<p>動作はいたって単純である．<code>numbers.txt</code>の内容から数値を読み取って，加算もしくは減算の結果をプリントする．実際に実行するためには，このパッケージをローカルにインストールする必要がある．</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>もちろん，環境変数<code>PYTHONPATH</code>に<code>iroha</code>ディレクトリを追加すればパッケージをインストールしないでも実行できる．ここではあえてこの方法を避けて，余計な環境変数を作らない方針をとる．環境変数<code>PATH</code>にも一切ふれていないことを思い出してほしい．</p>
+</div>
+<h2 id="_3">設定ファイルの作成</h2>
+<p>プロジェクトをパッケージングしてインストールするために必要な設定ファイルを作成していく．詳しくは，<a href="http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html">「Python Packaging User Guide」</a>の<a href="http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html#id4">「プロジェクトのパッケージングと配布」</a>を参照されたい．今回は以下の2つのファイルを準備した．</p>
+<ul>
+<li><a href="https://github.com/daizutabi/iroha/blob/master/setup.py"><code>setup.py</code></a></li>
+<li><a href="https://github.com/daizutabi/iroha/blob/master/MANIFEST.in"><code>MANIFEST.in</code></a></li>
+</ul>
+<h2 id="_4">作業用にローカルにインストール</h2>
+<p>ここまで準備できたら，パッケージとしてローカルにインストールすることができる．<code>iroha</code>ディレクトリ下で以下を実行する．オプション<code>-e</code>をつけることで，編集可能な作業用としてインストールする．</p>
+<pre><code class="bash">(iroha) &gt; pip install -e .
+</code></pre>
+
+<p>動作をおさらいしておこう．<code>numbers.txt</code>の内容（<code>3 2</code>）から数値を読み取って，加算もしくは減算の結果をプリントする．まずは，通常のPythonファイルとして実行する．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<pre><code class="bash">(iroha) &gt; python main.py add
+5
+(iroha) &gt; python main.py sub
+1
+</code></pre>
+
+<p>ここで，<code>main.py</code>は<code>iroha</code>パッケージの中の<code>main.py</code>としてではなく，単なる一つのPythonスクリプトとして実行されている．</p>
+<p><code>setup.py</code>で指定しておいた実行コマンドも使えるようになっている．</p>
+<pre><code class="bash">(iroha) &gt; iroha add
+5
+(iroha) &gt; iroha sub
+1
+</code></pre>
+
+<p>上のコマンドの実行ファイルは，</p>
+<pre><code>C:\Users\daizu\Miniconda3\envs\iroha\Scripts\iroha.exe
+</code></pre>
+
+<p>である．試しにアンインストールしてみよう．</p>
+<pre><code class="bash">(iroha) &gt; pip uninstall iroha
+</code></pre>
+
+<p>上記<code>iroha.exe</code>が勝手に消去されるのが分かる．</p>
+<p>別のPythonプログラムから<code>iroha</code>パッケージを使うこともできる．</p>
+<pre><code class="python">(iroha) &gt; python
+&gt;&gt;&gt; import iroha
+&gt;&gt;&gt; iroha.__file__
+'C:\\Users\\daizu\\Python\\iroha\\iroha\\__init__.py'
+</code></pre>
+
+<p>インストールといっても，今回は作業用にインストールしたので，別の場所にコピーが作成されているのではなく，<code>iroha</code>ディレクトリ以下の元のファイルがそのまま使われている．<code>sys.path</code>を見てみよう．</p>
+<pre><code class="python">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; for path in sys.path:
+...     print(path)
+
+C:\Users\daizu\Miniconda3\envs\iroha\python36.zip
+C:\Users\daizu\Miniconda3\envs\iroha\DLLs
+C:\Users\daizu\Miniconda3\envs\iroha\lib
+C:\Users\daizu\Miniconda3\envs\iroha
+C:\Users\daizu\Miniconda3\envs\iroha\lib\site-packages
+c:\users\daizu\python\iroha
+</code></pre>
+
+<p><code>sys.path</code>の最後に作業ディレクトリが追加されている．先ほどと同じように<code>iroha</code>パッケージをアンインストールすると，<code>sys.path</code>から<code>iroha</code>パッケージへの参照がなくなる．</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../pypi/" class="btn btn-neutral float-right" title="PyPIへのアップロード">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../environment/" class="btn btn-neutral" title="Python実行環境"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../environment/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../pypi/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

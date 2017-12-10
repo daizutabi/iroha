@@ -1,13 +1,20 @@
 site_name: Pythonパッケージの作り方
-docs_dir: sources
-markdown_extensions:
-  - admonition
+site_url: https://daizutabi.github.io/iroha/
+repo_url: https://github.com/daizutabi/iroha/
+edit_uri: ''
+
 theme:
   name: readthedocs
   language: 'jp'
+docs_dir: sources
+site_dir: docs
+
 extra:
   search:
     language: 'jp'
+
+markdown_extensions:
+  - admonition
 
 pages:
   - Home: index.md
