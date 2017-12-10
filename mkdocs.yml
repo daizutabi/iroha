@@ -16,6 +16,11 @@ extra:
 markdown_extensions:
   - admonition
 
+
+google_analytics:
+  - 'UA-110929554-1'
+  - 'auto'
+
 pages:
   - Home: index.md
   - Python実行環境: environment.md

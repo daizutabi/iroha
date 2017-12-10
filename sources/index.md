@@ -8,7 +8,7 @@ Pythonパッケージの作り方を説明する．単にパッケージを作�
 
 ## 参考URL
 
-パッケージを公開するために，多くのサイトを参照したが，特に，以下のサイトに依るところが大きい．これらを参照すれば，より有益な情報を得ることができるだろう．
+パッケージを公開するために，多くのサイトを参照したが，特に，以下のサイトに依るところが大きい．これらを参照すれば，より深く有益な情報を得ることができるだろう．
 
 * [How To Package Your Python Code](https://python-packaging.readthedocs.io/en/latest/minimal.html)
 * [Python Packaging User Guide](https://packaging.python.org/)
