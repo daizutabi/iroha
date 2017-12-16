@@ -29,7 +29,7 @@ Pythonの実行環境は[Miniconda]( https://conda.io/miniconda.html)をイン�
 !!! Note
     プロンプト前の`(takuhai)`は`takuhai`環境下でコマンドを実行していること意味します．
 
-`takuhai`パッケージは[`click`](http://click.pocoo.org)，[`Pelican`](http://docs.getpelican.com/en/stable/)，および[`livereload`](https://github.com/lepture/python-livereload)を使うのでインストールしておきましょう．
+`takuhai`パッケージは[`click`](http://click.pocoo.org)，[`pelican`](http://docs.getpelican.com/en/stable/)，および[`livereload`](https://github.com/lepture/python-livereload)を使うのでインストールしておきましょう．
 
 ```bash
 (takuhai) > conda install click
