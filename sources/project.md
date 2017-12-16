@@ -34,13 +34,13 @@
 
 ## 作業用にインストール
 
-ここまで準備できたら，パッケージとしてインストールすることができます．`setup.py`があるディレクトリで以下を実行します．オプション`-e`をつけることで，「編集可能」な作業用としてインストールします．
+ここまで準備できたら，パッケージをインストールすることができます．`setup.py`があるディレクトリで以下を実行します．オプション`-e`をつけることで，「編集可能」な作業用としてインストールします．
 
 ```bash
 (takuhai) > pip install -e .
 ```
 
-まずは，通常のPythonファイルとして実行してみましょう．`takuhai`ディレクトリに移動して，以下を実行します．
+`takuhai`パッケージの中の`main.py`を実行してみます．
 
 ```bash
 (takuhai) > cd takuhai
@@ -49,7 +49,7 @@ Usage: main.py [OPTIONS] COMMAND [ARGS]...
 （後略）
 ```
 
-ここで，`main.py`は`takuhai`パッケージの中の`main.py`としてではなく，単なる一つのPythonスクリプトとして実行されています．
+`main.py`は`takuhai`パッケージの中の`main.py`としてではなく，単なる一つのPythonスクリプトとして実行されていることに留意しましょう．
 
 `setup.py`で指定しておいた実行コマンドも使えるようになっています．
 
@@ -59,7 +59,7 @@ Usage: main.py [OPTIONS] COMMAND [ARGS]...
 （後略）
 ```
 
-上のコマンドの実行ファイルは，
+コマンド`takuhai`の実行ファイルは，
 
 ```
 C:\Users\daizu\Miniconda3\envs\takuhai\Scripts\takuhai.exe
