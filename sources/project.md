@@ -30,7 +30,7 @@
 
 ## 設定ファイルの作成
 
-パッケージをインストールするために必要な設定ファイルを作成していきましょう．詳しくは，[「Python Packaging User Guide」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)の[「プロジェクトのパッケージングと配布」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html#id4)を参照してください．まずは必須となる[`setup.py`](https://github.com/daizutabi/takuhai/blob/master/setup.py)を準備しました．`setup.py`は`takuhai`レポジトリの直下に置きます．
+パッケージをインストールするために必要な設定ファイルを作成していきましょう．詳しくは，[「Python Packaging User Guide」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)の[「プロジェクトのパッケージングと配布」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html)を参照してください．まずは必須となる[`setup.py`](https://github.com/daizutabi/takuhai/blob/master/setup.py)を準備しました．`setup.py`は`takuhai`レポジトリの直下に置きます．
 
 ## 作業用にインストール
 
