@@ -26,6 +26,16 @@
   <script src="../js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-110929554-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -96,11 +106,6 @@
     <a class="" href="../anaconda/">Anacondaへのアップロード</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
-	    </li>
-          
         </ul>
       </div>
       &nbsp;
@@ -135,27 +140,27 @@
               
                 <h1 id="pypi">PyPIへのアップロード</h1>
 <h2 id="_1">ディストリビューションの作成</h2>
-<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>に公開するために，プロジェクトのディストリビューションを作る．</p>
+<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>に公開するために，プロジェクトのディストリビューションを作ります．</p>
 <h3 id="_2">ソースディストリビューション</h3>
-<p>ソースディストリビューションを作成する．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
-<pre><code class="bash">(iroha) &gt; python setup.py sdist
+<p>ソースディストリビューションを作成します．<code>setup.py</code>があるディレクトリ下で以下を実行します．</p>
+<pre><code class="bash">(takuhai) &gt; python setup.py sdist
 </code></pre>
 
-<p><code>dist</code>ディレクトリが新しく作られて，その中に<code>iroha-0.1.0.tar.gz</code>が格納された．</p>
+<p><code>dist</code>ディレクトリが新しく作られて，その中に<code>takuhai-0.1.0.tar.gz</code>が格納されます．</p>
 <h3 id="wheels">Wheels</h3>
-<p>ビルドされたwheelを作成する．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
-<pre><code class="bash">(iroha) &gt; python setup.py bdist_wheel
+<p>ビルドされたwheelを作成します．<code>setup.py</code>があるディレクトリ下で以下を実行します．</p>
+<pre><code class="bash">(takuhai) &gt; python setup.py bdist_wheel
 </code></pre>
 
-<p><code>build</code>ディレクトリが新しく作られて，いろいろなファイルが生成された．wheel自体は，<code>dist</code>下に<code>iroha-0.1.0-py3-none-any.whl</code>の名前で格納された．</p>
+<p><code>build</code>ディレクトリが新しく作られて，いろいろなファイルが作られます．wheel自体は<code>dist</code>下に<code>takuhai-0.1.0-py3-none-any.whl</code>の名前で格納されます．</p>
 <h2 id="_3">アップロード</h2>
 <h3 id="_4">アカウントの作成</h3>
-<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>にアップロードするためには事前にユーザーアカウントを作成しておく必要がある．テスト用の<a href="https://testpypi.python.org/pypi">Test PyPI</a>にアップロードする場合は，別途ユーザーアカウントが必要である．それぞれの登録フォームは以下である．</p>
+<p>プロジェクトを<a href="https://pypi.python.org/pypi">PyPI</a>にアップロードするためには事前にユーザーアカウントを作成しておく必要があります．テスト用の<a href="https://testpypi.python.org/pypi">Test PyPI</a>にアップロードする場合は，別途ユーザーアカウントが必要です．以下のフォームから登録しましょう．</p>
 <ul>
 <li><a href="https://pypi.python.org/pypi?%3Aaction=register_form">PyPIのユーザ登録</a></li>
 <li><a href="https://testpypi.python.org/pypi?%3Aaction=register_form">Test PyPIのユーザ登録</a></li>
 </ul>
-<p>ユーザー登録が終わったら，<code>~/.pypirc</code>を用意し，以下のように書く．</p>
+<p>ユーザー登録が終わったら，<code>~/.pypirc</code>を用意し，以下のように書きます．</p>
 <pre><code>[distutils]
 index-servers =
     pypi
@@ -172,68 +177,70 @@ username: &lt;username&gt;
 password: &lt;password&gt;
 </code></pre>
 
-<p><code>username</code>行および<code>password</code>行は省略してもよい。<code>twine</code>に<code>-u USERNAME</code>引数，<code>-p PASSWORD</code>引数を渡すか、単に要求されたときに入力すればよい．</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>pypiのrepository行は省略可能である．</p>
+<p>pypiのrepository行は省略できます．また<code>username</code>行および<code>password</code>行も省略できます．後述の<code>twine</code>に<code>-u USERNAME</code>引数，<code>-p PASSWORD</code>引数を渡すか、単に要求されたときに入力しましょう．</p>
 </div>
 <h3 id="_5">アップロード</h3>
-<p>アップロードするには<a href="https://github.com/pypa/twine">twine</a>を使う．twineは他のプロジェクトでも使うので，専用の環境<code>twine</code>下にインストールする．こうすることで，<code>iroha</code>プロジェクトに直接関係のない<code>twine</code>やそれが依存するパッケージで<code>iroha</code>環境が汚染されることを防ぐ．</p>
+<p>アップロードするには<a href="https://github.com/pypa/twine">twine</a>を使います．twineは他のプロジェクトでも使うので，専用の<code>twine</code>環境下にインストールします．こうすることで，<code>takuhai</code>プロジェクトに直接関係のない<code>twine</code>やそれが依存するパッケージで<code>takuhai</code>環境が汚染されることを防ぎます．</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code>python setup.py sdist</code>，<code>python setup.py bdist_wheel</code>は<code>twine</code>環境下で実行することができる．</p>
+<p><code>python setup.py sdist</code>，<code>python setup.py bdist_wheel</code>は<code>twine</code>環境下で実行することもできます．</p>
 </div>
-<pre><code class="bash">(iroha) &gt; conda create -n twine
-(iroha) &gt; activate twine
-(twine) &gt; conda install twine -c conda-forge
+<pre><code class="bash">(takuhai) &gt; conda create -n twine
+(takuhai) &gt; activate twine
+(twine) &gt; conda install -c conda-forge twine
 </code></pre>
 
-<p>さて，実際にアップロードしよう．<code>iroha</code>ディレクトリ下で以下を実行する．</p>
+<p>PyPIにアップロードしましょう．<code>dist</code>があるディレクトリ下で以下を実行します．</p>
 <pre><code class="bash">(twine) &gt; twine upload dist/*
 </code></pre>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>最初のリリースの際にアップロード前にプロジェクトを明示的に登録する<code>twine register</code>は現在（2017/12）は不要になっている．</p>
-</div>
 <h3 id="pypi_1">PyPIからのインストール</h3>
-<p>PyPIからインストールできるかテストしてみよう．そのための一時的な環境<code>irohatest</code>を作る．この環境には<code>pip</code>自体がないのでインストールする．</p>
-<pre><code class="bash">(twine) &gt; conda create -n irohatest
-(twine) &gt; activate irohatest
-(irohatest) &gt; conda install pip
-(irohatest) &gt; pip freeze
-certifi==2017.11.5
-wincertstore==0.2
+<p>PyPIからインストールできるかテストしてみましょう．そのための一時的な<code>takuhai-pypi</code>環境を作ります．確実にリモートからダウンロードするためにキャッシュを無効にします．</p>
+<pre><code class="bash">(twine) &gt; conda create -n takuhai-pypi
+(twine) &gt; activate takuhai-pypi
+(takuhai-pypi) &gt; conda install pip
+(takuhai-pypi) &gt; pip install takuhai --no-cache-dir
+Collecting takuhai
+  Downloading takuhai-0.1.0-py3-none-any.whl
+Collecting livereload (from takuhai)
+  Downloading livereload-2.5.1.tar.gz
+（後略）
 </code></pre>
 
-<p>さきほどアップロードした<code>iroha</code>パッケージをインストールする．確実にリモートからダウンロードするためにキャッシュを無効にする．</p>
-<pre><code class="bash">(irohatest) &gt; pip install iroha --no-cache-dir
-Collecting iroha
-  Downloading iroha-0.1.1-py3-none-any.whl
-Collecting click (from iroha)
-  Downloading click-6.7-py2.py3-none-any.whl (71kB)
-    100% |████████████████████████████████| 71kB 1.1MB/s
-Installing collected packages: click, iroha
-Successfully installed click-6.7 iroha-0.1.1
-</code></pre>
-
-<p><code>click</code>パッケージも同時にインストールされていることがわかる．インストールされているパッケージを確認しておく．</p>
-<pre><code class="bash">(irohatest) &gt; pip freeze
+<p>必要なパッケージも同時にインストールされていることが分かります．</p>
+<pre><code class="bash">(takuhai-pypi) &gt; pip freeze
+blinker==1.4
 certifi==2017.11.5
 click==6.7
-iroha==0.1.1
+docutils==0.14
+feedgenerator==1.9
+Jinja2==2.10
+livereload==2.5.1
+MarkupSafe==1.0
+pelican==3.7.1
+Pygments==2.2.0
+python-dateutil==2.6.1
+pytz==2017.3
+six==1.11.0
+takuhai==0.1.0
+tornado==4.5.2
+Unidecode==0.4.21
 wincertstore==0.2
 </code></pre>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>conda</code>でパッケージを管理している場合には，<code>click</code>がpipでインストールされるのを望ましく思わないかもしれない．その場合には，事前に<code>conda install click</code>を実行しよう．</p>
-</div>
-<p><code>iroha</code>パッケージは作業ディレクトリのものではなく，<code>irohatest</code>環境の<code>site-packages</code>下にダウンロードされたものが使われている．</p>
-<pre><code class="python">(irohatest) &gt; python
-&gt;&gt;&gt; import iroha
-&gt;&gt;&gt; iroha.__file__
-'C:\\Users\\daizu\\Miniconda3\\envs\\irohatest\\lib\\site-packages\\iroha\\__init__.py'
+<p><code>takuhai</code>パッケージは作業ディレクトリのものではなく，<code>takuhai-pypi</code>環境の<code>site-packages</code>下にダウンロードされたものが使われています．</p>
+<pre><code class="python">(takuhai-pypi) &gt; cd ..
+(takuhai-pypi) &gt; python
+&gt;&gt;&gt; import takuhai
+&gt;&gt;&gt; takuhai.__file__
+'C:\\Users\\daizu\\Miniconda3\\envs\\takuhai-pypi\\lib\\site-packages\\takuhai\\__init__.py'
+</code></pre>
+
+<p>最後に不要になった環境を削除しておきます．</p>
+<pre><code class="bash">(takuhai-pypi) &gt; activate root
+(root) &gt; conda remove -n takuhai-pypi --all
 </code></pre>
               
             </div>
@@ -270,7 +277,7 @@ wincertstore==0.2
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/daizutabi/takuhai/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../project/" style="color: #fcfcfc;">&laquo; Previous</a></span>

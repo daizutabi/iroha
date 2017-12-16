@@ -1,147 +1,130 @@
-# Anaconda.orgへのアップロード
+# Anaconda Cloudへのアップロード
 
-いよいよ最後のタスクである．`iroha`パッケージをAnaconda Cloudで公開する． [Building conda packages with conda skeleton](https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html)を参照して一歩ずつ進めていこう．
+いよいよ最後のタスクです．`takuhai`パッケージを[Anaconda Cloud](https://anaconda.org/)で公開しましょう． [Building conda packages with conda skeleton](https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html)を参照して一歩ずつ進めていきます．
 
 ## condaパッケージの作成
 
-condaパッケージを作成するために必要な`conda-build`パッケージは，ルート環境下にしかインストールできない．同時に`m2-patch`もインストールする．
+condaパッケージを作成するために必要な`conda-build`パッケージは，ルート環境にしかインストールできません．`m2-patch`も同時にインストールしておきます．
 
 ```bash
 > activate root
 (root) > conda install m2-patch conda-build
 ```
 
-パッケージを作成したいディレクトリに移動して，以下を実行する．
+パッケージを作成したいディレクトリに移動して，以下を実行します．
 
 ```bash
-(root) > conda skeleton pypi iroha
+(root) > cd C:\Users\daizu\Desktop
+(root) > conda skeleton pypi takuhai
 ```
 
 !!! Note
-    そのディレクトリにすでに`iroha`ディレクトリがあるとエラーが発生する．
+    そのディレクトリにすでに`takuhai`ディレクトリがあるとエラーが発生します．
 
-
-!!! Note
-    実行の最後で「アクセスが拒否されました。」というメッセージが表示される場合があるが，ビルド自体はうまくいっている．
-
-`iroha`ディレクトリが作成されて，その下に`meya.yml`ファイルが格納された．次に２つの実行ファイルをダウンロードして同じディレクトリ下に保存する．
-
-* [`build.sh`](https://conda.io/docs/_downloads/build1.sh)
-* [`bld.bat`](https://conda.io/docs/_downloads/bld.bat)
-
-!!! Note
-    `build.sh`，`bld.bat`は必要なくなったようだ．
-
-パッケージをビルドする．
+`takuhai`ディレクトリが作成されて，その下に`meya.yml`ファイルが格納されます．パッケージをビルドします．`pelican`，`livereload`をダウンロードするために`conda-forge`チャネルを指定する必要があります．
 
 ```bash
-(root) > conda-build iroha
+(root) > conda build -c conda-forge takuhai
 ```
 
-Windowsの場合，
+しばらくするとビルドが完了します．
 
-```
-C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
-```
 
-が作成される．
+## ローカルのパッケージをインストール
 
-## ローカルにインストール
-
-`--use-local`フラッグを指定して`iroha`パッケージをインストールする．
+`--use-local`フラッグを指定して`takuhai`パッケージをインストールします．
 
 ```bash
-(root) > conda create -n conda-iroha
-(root) > activate conda-iroha
-(conda-iroha) > conda install --use-local iroha
+(root) > conda create -n takuhai-anaconda
+(root) > activate takuhai-anaconda
+(takuhai-anaconda) > conda install --use-local -c conda-forge takuhai
 ```
 
-依存パッケージ`click`とともに`iroha`パッケージがインストールされた．
+依存パッケージとともに`takuhai`パッケージがインストールされました．`conda list`を確認すると，`takuhai`パッケージが`local`チャネルでインストールされていることが分かります．チェックが済んだので，不要になった環境を削除しておきます．
 
 ```bash
-(conda-iroha) > conda list
-certifi                   2017.11.5        py36hb8ac631_0
-click                     6.7              py36hec8c647_0
-iroha                     0.1.3                    py36_0    local
-pip                       9.0.1            py36h226ae91_4
-python                    3.6.3                h3b118a2_4
-setuptools                36.5.0           py36h65f9e6e_0
-vc                        14                   h2379b0c_2
-vs2015_runtime            14.0.25123           hd4c4e62_2
-wheel                     0.30.0           py36h6c3ec14_1
-wincertstore              0.2              py36h7fe50ca_0
+(takuhai-anaconda) > activate root
+(root) > conda remove -n takuhai-anaconda --all
 ```
 
 ## オプションのステップ
+
+説明は省きますが，以下のようなオプションのステップがあります．
 
 * [Optional—Building for a different Python version]( https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-building-for-a-different-python-version)
 
 * [Optional—Converting conda package for other platforms](https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-converting-conda-package-for-other-platforms)
 
-## Anaconda.orgへのアップロード
+## Anaconda Cloudへのアップロード
 
-1. まだであれば，[Anaconda.org](https://anaconda.org)でアカウントを作成する
-1. `(root) > conda install anaconda-client`
-1. `(root) > anaconda login`でユーザー名とパスワードを入力する．
+[Anaconda Cloud](https://anaconda.org/)へアップロードしましょう．アカウントを作成していない場合は，[Anaconda Cloud](https://anaconda.org)でアカウントを作成しておきます．
 
-
-先ほど作ったパッケージをアップロードする．
+アップロードに必要な`anaconda-client`をインストールします．
 
 ```bash
-(root) > anaconda upload C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
+(root) > conda install anaconda-client
 ```
 
-[Anaconda.org](https://anaconda.org)にアクセスすると，`iroha`パッケージの表示が見つかるはずである．
-
-
-!!! Note
-    ビルド成功時に同時にアップロードを行うためには，`conda config --set anaconda_upload yes`を実行する．
-
-Anaconda.org経由でインストールしてみる．`daizutabi`チャネルを使う．
+次に，
 
 ```bash
-(root) conda remove -n conda-iroha --all
-(root) conda clean --all
-(root) > conda create -n conda-iroha
-(root) > activate conda-iroha
-(conda-iroha) > conda install -c daizutabi iroha
-(conda-iroha) > conda list
-certifi                   2017.11.5        py36hb8ac631_0
-click                     6.7              py36hec8c647_0
-iroha                     0.1.3                    py36_0    daizutabi
-pip                       9.0.1            py36h226ae91_4
-python                    3.6.3                h3b118a2_4
-setuptools                36.5.0           py36h65f9e6e_0
-vc                        14                   h2379b0c_2
-vs2015_runtime            14.0.25123           hd4c4e62_2
-wheel                     0.30.0           py36h6c3ec14_1
-wincertstore              0.2              py36h7fe50ca_0
+(root) > anaconda login
+```
+
+として，Anaconda Cloudのユーザー名とパスワードを入力します．
+
+先ほど作ったパッケージをアップロードします．
+
+```bash
+(root) > cd C:\Users\daizu\Miniconda3\conda-bld\win-64
+(root) > anaconda upload takuhai-0.1.2-py36_0.tar.bz2
+```
+
+[Anaconda Cloud](https://anaconda.org)にアクセスすると，Packagesのところに`takuhai`パッケージの表示が見つかるはずです．
+
+!!! Note
+    ビルド成功時に同時にアップロードを行うためには，`conda config --set anaconda_upload yes`を実行します．
+
+Anaconda Cloud上のパッケージをインストールしてみます．チャネルには`daizutabi`と`conda-forge`の両方を指定します．念のためキャッシュを削除しておきましょう．
+
+```bash
+(root) > conda clean --all
+(root) > conda create -n takuhai-anaconda
+(root) > activate takuhai-anaconda
+(conda-takuhai) > conda install -c daizutabi -c conda-forge takuhai
+```
+
+依存パッケージとともに`takuhai`パッケージがインストールされました．
+
+`conda list`を確認すると，`takuhai`パッケージが`daizutabi`チャネルでインストールされていることが分かります．最後に，不要になった環境を削除しておきます．
+
+```bash
+(takuhai-anaconda) > activate root
+(root) > conda remove -n takuhai-anaconda --all
 ```
 
 
 ## バッジの追加
 
-Anaconda.orgにパッケージを登録したことを示すバッジを`README.md`につける． `README.md`に記述を追加して以下のようになった．
+Anaconda Cloudにパッケージを登録したことを示すバッジを`README.md`につけます．
 
 ```markdown
-# Iroha Project
+# takuhai Project
 
-Python Packaging Tutorial
+Pelican converter and server
 
 ---
 
 [![PyPI Version][pypi-v-image]][pypi-v-link]
 [![Anaconda Version][anaconda-v-image]][anaconda-v-link]
-[![Build Status][travis-image]][travis-link]
+[![Travis][travis-image]][travis-link]
 
-[pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
-[pypi-v-link]: https://pypi.python.org/pypi/iroha
-[anaconda-v-image]: https://anaconda.org/daizutabi/iroha/badges/version.svg
-[anaconda-v-link]: https://anaconda.org/daizutabi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/iroha
+[pypi-v-image]: https://img.shields.io/pypi/v/takuhai.png
+[pypi-v-link]: https://pypi.python.org/pypi/takuhai
+[anaconda-v-image]: https://anaconda.org/daizutabi/takuhai/badges/version.svg
+[anaconda-v-link]: https://anaconda.org/daizutabi/takuhai
+[travis-image]: https://img.shields.io/travis/daizutabi/takuhai.svg?style=flat-square&label=Travis+CI
+[travis-link]: https://travis-ci.org/daizutabi/takuhai
 ```
 
-`git push`後に[レポジトリのページ](https://github.com/daizutabi/iroha)を確認するとバッジが表示されている．
-
-![バッジ](img/badge2.png)
+`git push`後に[レポジトリのページ](https://github.com/daizutabi/takuhai)を確認するとバッジが追加されていることが確認できるでしょう．

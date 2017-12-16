@@ -1,14 +1,14 @@
 # Pythonパッケージの作り方
 
-更新日：2017/12/10
+更新日：2017/12/16
 
 ## はじめに
 
-Pythonパッケージの作り方を説明する．単にパッケージを作るだけでなく，自作のパッケージをPyPI，Anaconda.orgに公開することを目指す．
+Pythonパッケージの作り方を説明します．単にパッケージを作るだけでなく，自作のパッケージを[PyPI](https://pypi.org)，[Anaconda Cloud](https://anaconda.org/)に公開することを目指します．また，[Travis CI](https://travis-ci.org/)を使って継続的インテグレーションを実践します．
 
 ## 参考URL
 
-パッケージを公開するために，多くのサイトを参照したが，特に，以下のサイトに依るところが大きい．これらを参照すれば，より深く有益な情報を得ることができるだろう．
+以下のサイトを参考にしました．直接参照すれば，より深く有益な情報を得ることができるでしょう．
 
 * [How To Package Your Python Code](https://python-packaging.readthedocs.io/en/latest/minimal.html)
 * [Python Packaging User Guide](https://packaging.python.org/)
@@ -17,16 +17,16 @@ Pythonパッケージの作り方を説明する．単にパッケージを作�
 
 ## 用語
 
-ここで用いる単語を明確化しておく．
+本サイトで用いる単語を明確化しておきます：
 
 * 環境：Anacondaの仮想環境．`conda create -n <環境名>`で作られる．
-* パッケージ：PyPIやAnaconda Cloudに公開するPythonコードの集合．Pythonスクリプト内で`import <package>`と記述してインポートされる．
-* プロジェクト：上記のパッケージ自体と，それをPyPIやAnaconda Cloudに公開するために必要となるファイル（設定ファイル）やディレクトリ（ドキュメントやテスト）の集合．文脈によって，これを「パッケージ」や「ディストリビューション」と呼んだりするが，ここでは，「プロジェクト」と呼ぶことにする．
+* パッケージ：PyPIやAnaconda Cloudに公開するPythonコードの集合．Pythonスクリプト内で`import <package>`と記述して利用する．
+* プロジェクト：上記のパッケージ自体と，それをPyPIやAnaconda Cloudに公開するために必要となるファイル（設定ファイル）やディレクトリ（ドキュメントやテスト）の集合．ひとつのプロジェクトに対してひとつのGitHubレポジトリを作る．
 
-それぞれの具体的な名前を以下の通りとする．
+以下では，`takuhai`プロジェクトを作成していきます．それぞれの具体的な名前を以下に示します：
 
-* 環境名：`iroha`
-* パッケージ：`iroha`
-* プロジェクト：`iroha`
+* 環境名：`takuhai`
+* パッケージ名：`takuhai`
+* プロジェクト名：`takuhai`
 
-全部同じ名前である．区別が必要なときには，`iroha`環境，`iroha`パッケージ，`iroha`プロジェクトと明記する．
+全部同じ名前ですね．区別が必要なときには，`takuhai`環境，`takuhai`パッケージ，`takuhai`プロジェクトと明記することにします．

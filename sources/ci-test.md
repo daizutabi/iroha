@@ -1,86 +1,60 @@
 # 継続的インテグレーションでのテスト
 
-継続的インテグレーションツールとして，GitHubと連動する[Travis CI](https://travis-ci.org/)を用いる．Travis CIがはじめてならば，まずは[Getting started](https://docs.travis-ci.com/user/getting-started/)を一読しよう．以下では最低限の，少なくとテストがパスするまでの手順について説明する．
-
+継続的インテグレーションツールとして，GitHubと連動する[Travis CI](https://travis-ci.org/)を用います．Travis CIがはじめてなら，まずは[Getting started](https://docs.travis-ci.com/user/getting-started/)を一読しましょう．以下ではテストがパスするまでの最低限の手順について説明します．
 
 ## 準備
 
-Travis CIにGitHubアカウントでログインする．画面右上のユーザ名のメニューから[Accounts](https://travis-ci.org/profile)を選択する．レポジトリ一覧が表示されるので，`iroha`レポジトリをビルド可能状態にする．
+Travis CIにGitHubアカウントでログインします．画面右上のユーザ名のメニューから[Accounts](https://travis-ci.org/profile)を選択します．レポジトリ一覧が表示されるので，`takuhai`レポジトリをビルド可能状態にします．
 
-![Build enable](img/enable.png) daizutabi/iroha
+![Build enable](img/enable.png) daizutabi/takuhai
 
-ローカルの`iroha`プロジェクトディレクトリ下に`.travis.yml`ファイルを作成し，以下の内容で保存する．
-
-```yaml
-language: python
-```
-
-## ビルトが成功するまで
-
-`git push`する．するとTravis CIのページが自動で切り替わり，ビルド処理を始めたことがわかるだろう．`python 2.7`といった文字列が見受けられる．しばらくすると，ビルドが失敗に終わったことが通知される．何も設定していないので当然だ．Job logを見ると，`requirements.txt`がないことに警告が出ている模様だ．`requirements.txt`には依存パッケージを記述するようなので，以下の内容のファイルを`iroha`ディレクト下に`requirements.txt`の名前で保存しておく．
-
-```text
-click
-```
-
-!!! Note
-    `iroha`パッケージが依存するパッケージは，`setup.py`内に記述していた．再度，`requirements.txt`にも同じ内容を書くのは冗長でないかと疑問を持つかもしれない．冗長を回避するために，`setup.py`が`requirements.txt`の内容を解析して自動で依存パッケージを指定することも可能である．
-
-
-その他もろもろのドキュメントを読んでみると，Pythonのバージョン，インストール作業，および実行スクリプトを指定すればよいようだ．現時点での`.travis.yml`は以下のようになっている．
-
+ローカルPCの`takuhai`プロジェクトディレクトリ下に`.travis.yml`ファイルを作成します．以下の内容で保存しておきましょう．
 
 ```yaml
 language: python
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
   - "3.6"
 install:
   - pip install -r requirements.txt
+  - pip install -e .
 script:
+  - takuhai
   - pytest
 ```
 
-もう一度`git push`する．pytestの実行までは進んだようだが，エラーで停止してしまった．どうやら`iroa`パッケージが見つからないらしい．`.travis.yml`の`install`のところまで処理が進んだとき，カレントディレクトリはプロジェクトのルートディレクトリになっているようなので，次のようにして自分自身を作業用としてインストールする．
+`requirements.txt`には依存パッケージを記述します．`setup.py`と同じディレクトリに以下の内容で保存しておきます．
 
-```yaml
-language: python
-(中略)
-install:
-  - pip install -r requirements.txt
-  - pip install -e .
-(後略)
+```text
+click
+pelican
+livereload
 ```
 
-再び`git push`する．今度はビルドに成功した．
+!!! Note
+    `takuhai`パッケージが依存するパッケージは，`setup.py`内に記述していました．再度，`requirements.txt`にも同じ内容を書くのは冗長でないかと疑問を持つかもしれません．冗長を回避するために，`setup.py`が`requirements.txt`の内容を解析して自動で依存パッケージを指定することも可能です．
 
-!!! Tip
-    `pip install -e .` 以外でパッケージにパスを通す方法は？
+## ビルド
+
+Travis CIの`takuhai`プロジェクトページを開きます．ローカルPCのコマンドラインから`takuhai`レポジトリを`git push`してみましょう．するとTravis CIのページが自動で切り替わり，ビルド処理を始めます．しばらくすると，テストにパスしたことが確認できます．
 
 ## バッジをつけよう
 
-ビルドに成功したのでGitHubレポジトリに ![Build: Passing](img/passing.svg) のバッジをつけよう．あわせてPyPIのバッジもつけておく．
-
-`README.md`を以下の内容で保存する．
+ビルドに成功したのでGitHubレポジトリのREADMEにバッジをつけましょう．あわせてPyPIのバッジもつけておきます．`README.md`を以下の内容で保存します．
 
 ```markdown
-# Iroha Project
+# takuhai Project
 
-Python Packaging Tutorial
+Pelican converter and server
 
 ---
 
 [![PyPI Version][pypi-v-image]][pypi-v-link]
-[![Build Status][travis-image]][travis-link]
+[![Travis][travis-image]][travis-link]
 
-[pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
-[pypi-v-link]: https://pypi.python.org/pypi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/iroha
+[pypi-v-image]: https://img.shields.io/pypi/v/takuhai.png
+[pypi-v-link]: https://pypi.python.org/pypi/takuhai
+[travis-image]: https://img.shields.io/travis/daizutabi/takuhai.svg?style=flat-square&label=Travis+CI
+[travis-link]: https://travis-ci.org/daizutabi/takuhai
 ```
 
-`git push`後に[レポジトリのページ](https://github.com/daizutabi/iroha)を確認するとバッジが表示されている．
-
-![バッジ](img/badge.png)
+`git push`後に[レポジトリのページ](https://github.com/daizutabi/takuhai)を確認するとバッジが表示されています．

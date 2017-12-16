@@ -1,40 +1,39 @@
 # PyPIへのアップロード
 
-
 ## ディストリビューションの作成
 
-プロジェクトを[PyPI](https://pypi.python.org/pypi)に公開するために，プロジェクトのディストリビューションを作る．
+プロジェクトを[PyPI](https://pypi.python.org/pypi)に公開するために，プロジェクトのディストリビューションを作ります．
 
 ### ソースディストリビューション
 
-ソースディストリビューションを作成する．`iroha`ディレクトリ下で以下を実行する．
+ソースディストリビューションを作成します．`setup.py`があるディレクトリ下で以下を実行します．
 
 ```bash
-(iroha) > python setup.py sdist
+(takuhai) > python setup.py sdist
 ```
 
-`dist`ディレクトリが新しく作られて，その中に`iroha-0.1.0.tar.gz`が格納された．
+`dist`ディレクトリが新しく作られて，その中に`takuhai-0.1.0.tar.gz`が格納されます．
 
 ### Wheels
 
-ビルドされたwheelを作成する．`iroha`ディレクトリ下で以下を実行する．
+ビルドされたwheelを作成します．`setup.py`があるディレクトリ下で以下を実行します．
 
 ```bash
-(iroha) > python setup.py bdist_wheel
+(takuhai) > python setup.py bdist_wheel
 ```
 
-`build`ディレクトリが新しく作られて，いろいろなファイルが生成された．wheel自体は，`dist`下に`iroha-0.1.0-py3-none-any.whl`の名前で格納された．
+`build`ディレクトリが新しく作られて，いろいろなファイルが作られます．wheel自体は`dist`下に`takuhai-0.1.0-py3-none-any.whl`の名前で格納されます．
 
 ## アップロード
 
 ### アカウントの作成
 
-プロジェクトを[PyPI](https://pypi.python.org/pypi)にアップロードするためには事前にユーザーアカウントを作成しておく必要がある．テスト用の[Test PyPI](https://testpypi.python.org/pypi)にアップロードする場合は，別途ユーザーアカウントが必要である．それぞれの登録フォームは以下である．
+プロジェクトを[PyPI](https://pypi.python.org/pypi)にアップロードするためには事前にユーザーアカウントを作成しておく必要があります．テスト用の[Test PyPI](https://testpypi.python.org/pypi)にアップロードする場合は，別途ユーザーアカウントが必要です．以下のフォームから登録しましょう．
 
 * [PyPIのユーザ登録](https://pypi.python.org/pypi?%3Aaction=register_form)
 * [Test PyPIのユーザ登録](https://testpypi.python.org/pypi?%3Aaction=register_form)
 
-ユーザー登録が終わったら，`~/.pypirc`を用意し，以下のように書く．
+ユーザー登録が終わったら，`~/.pypirc`を用意し，以下のように書きます．
 
 ```
 [distutils]
@@ -53,80 +52,82 @@ username: <username>
 password: <password>
 ```
 
-`username`行および`password`行は省略してもよい。`twine`に`-u USERNAME`引数，`-p PASSWORD`引数を渡すか、単に要求されたときに入力すればよい．
-
 
 !!! Note
-    pypiのrepository行は省略可能である．
+    pypiのrepository行は省略できます．また`username`行および`password`行も省略できます．後述の`twine`に`-u USERNAME`引数，`-p PASSWORD`引数を渡すか、単に要求されたときに入力しましょう．
 
 ### アップロード
 
-アップロードするには[twine](https://github.com/pypa/twine)を使う．twineは他のプロジェクトでも使うので，専用の環境`twine`下にインストールする．こうすることで，`iroha`プロジェクトに直接関係のない`twine`やそれが依存するパッケージで`iroha`環境が汚染されることを防ぐ．
+アップロードするには[twine](https://github.com/pypa/twine)を使います．twineは他のプロジェクトでも使うので，専用の`twine`環境下にインストールします．こうすることで，`takuhai`プロジェクトに直接関係のない`twine`やそれが依存するパッケージで`takuhai`環境が汚染されることを防ぎます．
 
 !!! Note
-    `python setup.py sdist`，`python setup.py bdist_wheel`は`twine`環境下で実行することができる．
+    `python setup.py sdist`，`python setup.py bdist_wheel`は`twine`環境下で実行することもできます．
 
 
 ```bash
-(iroha) > conda create -n twine
-(iroha) > activate twine
-(twine) > conda install twine -c conda-forge
+(takuhai) > conda create -n twine
+(takuhai) > activate twine
+(twine) > conda install -c conda-forge twine
 ```
 
-さて，実際にアップロードしよう．`iroha`ディレクトリ下で以下を実行する．
+PyPIにアップロードしましょう．`dist`があるディレクトリ下で以下を実行します．
 
 ```bash
 (twine) > twine upload dist/*
 ```
 
-!!! Note
-    最初のリリースの際にアップロード前にプロジェクトを明示的に登録する`twine register`は現在（2017/12）は不要になっている．
-
 ### PyPIからのインストール
 
-PyPIからインストールできるかテストしてみよう．そのための一時的な環境`irohatest`を作る．この環境には`pip`自体がないのでインストールする．
+PyPIからインストールできるかテストしてみましょう．そのための一時的な`takuhai-pypi`環境を作ります．確実にリモートからダウンロードするためにキャッシュを無効にします．
 
 ```bash
-(twine) > conda create -n irohatest
-(twine) > activate irohatest
-(irohatest) > conda install pip
-(irohatest) > pip freeze
-certifi==2017.11.5
-wincertstore==0.2
+(twine) > conda create -n takuhai-pypi
+(twine) > activate takuhai-pypi
+(takuhai-pypi) > conda install pip
+(takuhai-pypi) > pip install takuhai --no-cache-dir
+Collecting takuhai
+  Downloading takuhai-0.1.0-py3-none-any.whl
+Collecting livereload (from takuhai)
+  Downloading livereload-2.5.1.tar.gz
+（後略）
 ```
 
-さきほどアップロードした`iroha`パッケージをインストールする．確実にリモートからダウンロードするためにキャッシュを無効にする．
+必要なパッケージも同時にインストールされていることが分かります．
 
 ```bash
-(irohatest) > pip install iroha --no-cache-dir
-Collecting iroha
-  Downloading iroha-0.1.1-py3-none-any.whl
-Collecting click (from iroha)
-  Downloading click-6.7-py2.py3-none-any.whl (71kB)
-    100% |████████████████████████████████| 71kB 1.1MB/s
-Installing collected packages: click, iroha
-Successfully installed click-6.7 iroha-0.1.1
-```
-
-`click`パッケージも同時にインストールされていることがわかる．インストールされているパッケージを確認しておく．
-
-
-```bash
-(irohatest) > pip freeze
+(takuhai-pypi) > pip freeze
+blinker==1.4
 certifi==2017.11.5
 click==6.7
-iroha==0.1.1
+docutils==0.14
+feedgenerator==1.9
+Jinja2==2.10
+livereload==2.5.1
+MarkupSafe==1.0
+pelican==3.7.1
+Pygments==2.2.0
+python-dateutil==2.6.1
+pytz==2017.3
+six==1.11.0
+takuhai==0.1.0
+tornado==4.5.2
+Unidecode==0.4.21
 wincertstore==0.2
 ```
 
-!!! Note
-    `conda`でパッケージを管理している場合には，`click`がpipでインストールされるのを望ましく思わないかもしれない．その場合には，事前に`conda install click`を実行しよう．
-
-`iroha`パッケージは作業ディレクトリのものではなく，`irohatest`環境の`site-packages`下にダウンロードされたものが使われている．
+`takuhai`パッケージは作業ディレクトリのものではなく，`takuhai-pypi`環境の`site-packages`下にダウンロードされたものが使われています．
 
 ```python
-(irohatest) > python
->>> import iroha
->>> iroha.__file__
-'C:\\Users\\daizu\\Miniconda3\\envs\\irohatest\\lib\\site-packages\\iroha\\__init__.py'
+(takuhai-pypi) > cd ..
+(takuhai-pypi) > python
+>>> import takuhai
+>>> takuhai.__file__
+'C:\\Users\\daizu\\Miniconda3\\envs\\takuhai-pypi\\lib\\site-packages\\takuhai\\__init__.py'
+```
+
+最後に不要になった環境を削除しておきます．
+
+```bash
+(takuhai-pypi) > activate root
+(root) > conda remove -n takuhai-pypi --all
 ```

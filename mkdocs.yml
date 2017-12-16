@@ -1,6 +1,6 @@
 site_name: Pythonパッケージの作り方
-site_url: https://daizutabi.github.io/iroha/
-repo_url: https://github.com/daizutabi/iroha/
+site_url: https://daizutabi.github.io/takuhai/
+repo_url: https://github.com/daizutabi/takuhai/
 edit_uri: ''
 
 theme:
@@ -16,7 +16,6 @@ extra:
 markdown_extensions:
   - admonition
 
-
 google_analytics:
   - 'UA-110929554-1'
   - 'auto'
@@ -29,4 +28,4 @@ pages:
   - ローカルでのテスト: local-test.md
   - CIでのテスト: ci-test.md
   - Anacondaへのアップロード: anaconda.md
-  - ビルドとデプロイの自動化: ci-deploy.md
+  # - ビルドとデプロイの自動化: ci-deploy.md

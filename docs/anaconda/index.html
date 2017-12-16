@@ -26,6 +26,16 @@
   <script src="../js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-110929554-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -82,17 +92,17 @@
     <a class="current" href="./">Anacondaへのアップロード</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#anacondaorg">Anaconda.orgへのアップロード</a></li>
+    <li class="toctree-l2"><a href="#anaconda-cloud">Anaconda Cloudへのアップロード</a></li>
     
         <ul>
         
             <li><a class="toctree-l3" href="#conda">condaパッケージの作成</a></li>
         
-            <li><a class="toctree-l3" href="#_1">ローカルにインストール</a></li>
+            <li><a class="toctree-l3" href="#_1">ローカルのパッケージをインストール</a></li>
         
             <li><a class="toctree-l3" href="#_2">オプションのステップ</a></li>
         
-            <li><a class="toctree-l3" href="#anacondaorg_1">Anaconda.orgへのアップロード</a></li>
+            <li><a class="toctree-l3" href="#anaconda-cloud_1">Anaconda Cloudへのアップロード</a></li>
         
             <li><a class="toctree-l3" href="#_3">バッジの追加</a></li>
         
@@ -100,11 +110,6 @@
     
 
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../ci-deploy/">ビルドとデプロイの自動化</a>
 	    </li>
           
         </ul>
@@ -139,66 +144,42 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="anacondaorg">Anaconda.orgへのアップロード</h1>
-<p>いよいよ最後のタスクである．<code>iroha</code>パッケージをAnaconda Cloudで公開する． <a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html">Building conda packages with conda skeleton</a>を参照して一歩ずつ進めていこう．</p>
+                <h1 id="anaconda-cloud">Anaconda Cloudへのアップロード</h1>
+<p>いよいよ最後のタスクです．<code>takuhai</code>パッケージを<a href="https://anaconda.org/">Anaconda Cloud</a>で公開しましょう． <a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html">Building conda packages with conda skeleton</a>を参照して一歩ずつ進めていきます．</p>
 <h2 id="conda">condaパッケージの作成</h2>
-<p>condaパッケージを作成するために必要な<code>conda-build</code>パッケージは，ルート環境下にしかインストールできない．同時に<code>m2-patch</code>もインストールする．</p>
+<p>condaパッケージを作成するために必要な<code>conda-build</code>パッケージは，ルート環境にしかインストールできません．<code>m2-patch</code>も同時にインストールしておきます．</p>
 <pre><code class="bash">&gt; activate root
 (root) &gt; conda install m2-patch conda-build
 </code></pre>
 
-<p>パッケージを作成したいディレクトリに移動して，以下を実行する．</p>
-<pre><code class="bash">(root) &gt; conda skeleton pypi iroha
+<p>パッケージを作成したいディレクトリに移動して，以下を実行します．</p>
+<pre><code class="bash">(root) &gt; cd C:\Users\daizu\Desktop
+(root) &gt; conda skeleton pypi takuhai
 </code></pre>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>そのディレクトリにすでに<code>iroha</code>ディレクトリがあるとエラーが発生する．</p>
+<p>そのディレクトリにすでに<code>takuhai</code>ディレクトリがあるとエラーが発生します．</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>実行の最後で「アクセスが拒否されました。」というメッセージが表示される場合があるが，ビルド自体はうまくいっている．</p>
-</div>
-<p><code>iroha</code>ディレクトリが作成されて，その下に<code>meya.yml</code>ファイルが格納された．次に２つの実行ファイルをダウンロードして同じディレクトリ下に保存する．</p>
-<ul>
-<li><a href="https://conda.io/docs/_downloads/build1.sh"><code>build.sh</code></a></li>
-<li><a href="https://conda.io/docs/_downloads/bld.bat"><code>bld.bat</code></a></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>build.sh</code>，<code>bld.bat</code>は必要なくなったようだ．</p>
-</div>
-<p>パッケージをビルドする．</p>
-<pre><code class="bash">(root) &gt; conda-build iroha
+<p><code>takuhai</code>ディレクトリが作成されて，その下に<code>meya.yml</code>ファイルが格納されます．パッケージをビルドします．<code>pelican</code>，<code>livereload</code>をダウンロードするために<code>conda-forge</code>チャネルを指定する必要があります．</p>
+<pre><code class="bash">(root) &gt; conda build -c conda-forge takuhai
 </code></pre>
 
-<p>Windowsの場合，</p>
-<pre><code>C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
+<p>しばらくするとビルドが完了します．</p>
+<h2 id="_1">ローカルのパッケージをインストール</h2>
+<p><code>--use-local</code>フラッグを指定して<code>takuhai</code>パッケージをインストールします．</p>
+<pre><code class="bash">(root) &gt; conda create -n takuhai-anaconda
+(root) &gt; activate takuhai-anaconda
+(takuhai-anaconda) &gt; conda install --use-local -c conda-forge takuhai
 </code></pre>
 
-<p>が作成される．</p>
-<h2 id="_1">ローカルにインストール</h2>
-<p><code>--use-local</code>フラッグを指定して<code>iroha</code>パッケージをインストールする．</p>
-<pre><code class="bash">(root) &gt; conda create -n conda-iroha
-(root) &gt; activate conda-iroha
-(conda-iroha) &gt; conda install --use-local iroha
-</code></pre>
-
-<p>依存パッケージ<code>click</code>とともに<code>iroha</code>パッケージがインストールされた．</p>
-<pre><code class="bash">(conda-iroha) &gt; conda list
-certifi                   2017.11.5        py36hb8ac631_0
-click                     6.7              py36hec8c647_0
-iroha                     0.1.3                    py36_0    local
-pip                       9.0.1            py36h226ae91_4
-python                    3.6.3                h3b118a2_4
-setuptools                36.5.0           py36h65f9e6e_0
-vc                        14                   h2379b0c_2
-vs2015_runtime            14.0.25123           hd4c4e62_2
-wheel                     0.30.0           py36h6c3ec14_1
-wincertstore              0.2              py36h7fe50ca_0
+<p>依存パッケージとともに<code>takuhai</code>パッケージがインストールされました．<code>conda list</code>を確認すると，<code>takuhai</code>パッケージが<code>local</code>チャネルでインストールされていることが分かります．チェックが済んだので，不要になった環境を削除しておきます．</p>
+<pre><code class="bash">(takuhai-anaconda) &gt; activate root
+(root) &gt; conda remove -n takuhai-anaconda --all
 </code></pre>
 
 <h2 id="_2">オプションのステップ</h2>
+<p>説明は省きますが，以下のようなオプションのステップがあります．</p>
 <ul>
 <li>
 <p><a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-building-for-a-different-python-version">Optional—Building for a different Python version</a></p>
@@ -207,70 +188,67 @@ wincertstore              0.2              py36h7fe50ca_0
 <p><a href="https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#optional-converting-conda-package-for-other-platforms">Optional—Converting conda package for other platforms</a></p>
 </li>
 </ul>
-<h2 id="anacondaorg_1">Anaconda.orgへのアップロード</h2>
-<ol>
-<li>まだであれば，<a href="https://anaconda.org">Anaconda.org</a>でアカウントを作成する</li>
-<li><code>(root) &gt; conda install anaconda-client</code></li>
-<li><code>(root) &gt; anaconda login</code>でユーザー名とパスワードを入力する．</li>
-</ol>
-<p>先ほど作ったパッケージをアップロードする．</p>
-<pre><code class="bash">(root) &gt; anaconda upload C:\Users\daizu\Miniconda3\conda-bld\win-64\iroha-0.1.3-py36_0.tar.bz2
+<h2 id="anaconda-cloud_1">Anaconda Cloudへのアップロード</h2>
+<p><a href="https://anaconda.org/">Anaconda Cloud</a>へアップロードしましょう．アカウントを作成していない場合は，<a href="https://anaconda.org">Anaconda Cloud</a>でアカウントを作成しておきます．</p>
+<p>アップロードに必要な<code>anaconda-client</code>をインストールします．</p>
+<pre><code class="bash">(root) &gt; conda install anaconda-client
 </code></pre>
 
-<p><a href="https://anaconda.org">Anaconda.org</a>にアクセスすると，<code>iroha</code>パッケージの表示が見つかるはずである．</p>
+<p>次に，</p>
+<pre><code class="bash">(root) &gt; anaconda login
+</code></pre>
+
+<p>として，Anaconda Cloudのユーザー名とパスワードを入力します．</p>
+<p>先ほど作ったパッケージをアップロードします．</p>
+<pre><code class="bash">(root) &gt; cd C:\Users\daizu\Miniconda3\conda-bld\win-64
+(root) &gt; anaconda upload takuhai-0.1.2-py36_0.tar.bz2
+</code></pre>
+
+<p><a href="https://anaconda.org">Anaconda Cloud</a>にアクセスすると，Packagesのところに<code>takuhai</code>パッケージの表示が見つかるはずです．</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>ビルド成功時に同時にアップロードを行うためには，<code>conda config --set anaconda_upload yes</code>を実行する．</p>
+<p>ビルド成功時に同時にアップロードを行うためには，<code>conda config --set anaconda_upload yes</code>を実行します．</p>
 </div>
-<p>Anaconda.org経由でインストールしてみる．<code>daizutabi</code>チャネルを使う．</p>
-<pre><code class="bash">(root) conda remove -n conda-iroha --all
-(root) conda clean --all
-(root) &gt; conda create -n conda-iroha
-(root) &gt; activate conda-iroha
-(conda-iroha) &gt; conda install -c daizutabi iroha
-(conda-iroha) &gt; conda list
-certifi                   2017.11.5        py36hb8ac631_0
-click                     6.7              py36hec8c647_0
-iroha                     0.1.3                    py36_0    daizutabi
-pip                       9.0.1            py36h226ae91_4
-python                    3.6.3                h3b118a2_4
-setuptools                36.5.0           py36h65f9e6e_0
-vc                        14                   h2379b0c_2
-vs2015_runtime            14.0.25123           hd4c4e62_2
-wheel                     0.30.0           py36h6c3ec14_1
-wincertstore              0.2              py36h7fe50ca_0
+<p>Anaconda Cloud上のパッケージをインストールしてみます．チャネルには<code>daizutabi</code>と<code>conda-forge</code>の両方を指定します．念のためキャッシュを削除しておきましょう．</p>
+<pre><code class="bash">(root) &gt; conda clean --all
+(root) &gt; conda create -n takuhai-anaconda
+(root) &gt; activate takuhai-anaconda
+(conda-takuhai) &gt; conda install -c daizutabi -c conda-forge takuhai
+</code></pre>
+
+<p>依存パッケージとともに<code>takuhai</code>パッケージがインストールされました．</p>
+<p><code>conda list</code>を確認すると，<code>takuhai</code>パッケージが<code>daizutabi</code>チャネルでインストールされていることが分かります．最後に，不要になった環境を削除しておきます．</p>
+<pre><code class="bash">(takuhai-anaconda) &gt; activate root
+(root) &gt; conda remove -n takuhai-anaconda --all
 </code></pre>
 
 <h2 id="_3">バッジの追加</h2>
-<p>Anaconda.orgにパッケージを登録したことを示すバッジを<code>README.md</code>につける． <code>README.md</code>に記述を追加して以下のようになった．</p>
-<pre><code class="markdown"># Iroha Project
+<p>Anaconda Cloudにパッケージを登録したことを示すバッジを<code>README.md</code>につけます．</p>
+<pre><code class="markdown"># takuhai Project
 
-Python Packaging Tutorial
+Pelican converter and server
 
 ---
 
 [![PyPI Version][pypi-v-image]][pypi-v-link]
 [![Anaconda Version][anaconda-v-image]][anaconda-v-link]
-[![Build Status][travis-image]][travis-link]
+[![Travis][travis-image]][travis-link]
 
-[pypi-v-image]: https://img.shields.io/pypi/v/iroha.png
-[pypi-v-link]: https://pypi.python.org/pypi/iroha
-[anaconda-v-image]: https://anaconda.org/daizutabi/iroha/badges/version.svg
-[anaconda-v-link]: https://anaconda.org/daizutabi/iroha
-[travis-image]: https://travis-ci.org/daizutabi/iroha.svg?branch=master
-[travis-link]: https://travis-ci.org/daizutabi/iroha
+[pypi-v-image]: https://img.shields.io/pypi/v/takuhai.png
+[pypi-v-link]: https://pypi.python.org/pypi/takuhai
+[anaconda-v-image]: https://anaconda.org/daizutabi/takuhai/badges/version.svg
+[anaconda-v-link]: https://anaconda.org/daizutabi/takuhai
+[travis-image]: https://img.shields.io/travis/daizutabi/takuhai.svg?style=flat-square&amp;label=Travis+CI
+[travis-link]: https://travis-ci.org/daizutabi/takuhai
 </code></pre>
 
-<p><code>git push</code>後に<a href="https://github.com/daizutabi/iroha">レポジトリのページ</a>を確認するとバッジが表示されている．</p>
-<p><img alt="バッジ" src="../img/badge2.png" /></p>
+<p><code>git push</code>後に<a href="https://github.com/daizutabi/takuhai">レポジトリのページ</a>を確認するとバッジが追加されていることが確認できるでしょう．</p>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../ci-deploy/" class="btn btn-neutral float-right" title="ビルドとデプロイの自動化">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../ci-test/" class="btn btn-neutral" title="CIでのテスト"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -298,13 +276,11 @@ Python Packaging Tutorial
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/daizutabi/iroha/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/daizutabi/takuhai/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../ci-test/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../ci-deploy/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

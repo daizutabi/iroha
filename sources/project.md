@@ -1,122 +1,100 @@
 # プロジェクトの作成
 
-「プロジェクト」は，Pythonコード内で`import`されるパッケージに付加情報を合わせたものである．プロジェクトをGitHub上の一つのレポジトリに対応させる．まずは，GitHubで新規にレポジトリを作成する．名前はプロジェクト名と同じく`iroha`とする．新規作成の際には，
+「プロジェクト」は，Pythonコード内で`import`されるパッケージに付加情報を合わせたものです．ひとつのプロジェクトに対して，ひとつのGitHubレポジトリを対応させます．まずは，GitHubに新規にレポジトリを作成します．レポジトリの名前はプロジェクト名と同じく`takuhai`です．新規作成の際には，
 
 * [x] Initialize this repository with a README
 * Add .gitignore: [None]
 * Add a license: [MIT License]
 
-を選ぶ．
-
-レポジトリをローカルにクローンする．適当なディレクトリに移動し，
+を選んでおきます．次にレポジトリをローカルPCにクローンします．
 
 ```bash
-(iroha) > cd C:\Users\daizu\Python
-(iroha) > git clone https://github.com/daizutabi/iroha.git
+(takuhai) > cd C:\Users\daizu\Documents\GitHub
+(takuhai) > git clone https://github.com/daizutabi/takuhai.git
 ```
 
-とする．`C:\Users\daizu\Python\iroha`ディレクトリが作成された．
+`C:\Users\daizu\Documents\GitHub\takuhai`ディレクトリが作成されました．
 
 
 ## パッケージの作成
 
-まずは根幹となるパッケージを作っていこう．ディレクトリ構造は以下の通りである．同時に`.gitignore`も作っておく． 各ファイルの内容は，GitHubの[irohaレポジトリ](https://github.com/daizutabi/iroha/tree/master/iroha)を参照されたい．
+`takuhai`パッケージの詳細についてはここでは説明しませんが，できることを示しておきます：
 
-```
-+ iroha
-    + iroha
-        + add
-            - __init__.py
-            - calc.py
-        + data
-            - numbers.txt
-        + sub
-            - __init__.py
-            - calc.py
-        - __init__.py
-        - common.py
-        - main.py
-    .gitignore
-```
++ ファイル名からPelican文書のメタデータを自動作成．
++ 文書が変更されたら自動でサイト生成を行ってブラウザをリロード．
 
-動作はいたって単純である．`numbers.txt`の内容から数値を読み取って，加算もしくは減算の結果をプリントする．実際に実行するためには，このパッケージをローカルにインストールする必要がある．
+実際に使ってみましょう．そのためには，`takuhai`環境下にインストールする必要があります．
 
 !!! Note
-    もちろん，環境変数`PYTHONPATH`に`iroha`ディレクトリを追加すればパッケージをインストールしないでも実行できる．ここではあえてこの方法を避けて，余計な環境変数を作らない方針をとる．環境変数`PATH`にも一切ふれていないことを思い出してほしい．
+    もちろん，環境変数`PYTHONPATH`に`takuhai`ディレクトリを追加すればパッケージをインストールしないでも実行できます．しかし，ここではあえてこの方法を避けて，余計な環境変数を作らない方針をとります．Pythonを実行するために，環境変数`PATH`にも一切ふれていないことを思い出してください．
 
 ## 設定ファイルの作成
 
-プロジェクトをパッケージングしてインストールするために必要な設定ファイルを作成していく．詳しくは，[「Python Packaging User Guide」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)の[「プロジェクトのパッケージングと配布」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html#id4)を参照されたい．今回は以下の2つのファイルを準備した．
+パッケージをインストールするために必要な設定ファイルを作成していきましょう．詳しくは，[「Python Packaging User Guide」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html)の[「プロジェクトのパッケージングと配布」](http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html#id4)を参照してください．まずは必須となる[`setup.py`](https://github.com/daizutabi/takuhai/blob/master/setup.py)を準備しました．`setup.py`は`takuhai`レポジトリの直下に置きます．
 
+## 作業用にインストール
 
-* [`setup.py`](https://github.com/daizutabi/iroha/blob/master/setup.py)
-* [`MANIFEST.in`](https://github.com/daizutabi/iroha/blob/master/MANIFEST.in)
-
-
-## 作業用にローカルにインストール
-
-ここまで準備できたら，パッケージとしてローカルにインストールすることができる．`iroha`ディレクトリ下で以下を実行する．オプション`-e`をつけることで，編集可能な作業用としてインストールする．
+ここまで準備できたら，パッケージとしてインストールすることができます．`setup.py`があるディレクトリで以下を実行します．オプション`-e`をつけることで，「編集可能」な作業用としてインストールします．
 
 ```bash
-(iroha) > pip install -e .
+(takuhai) > pip install -e .
 ```
 
-動作をおさらいしておこう．`numbers.txt`の内容（`3 2`）から数値を読み取って，加算もしくは減算の結果をプリントする．まずは，通常のPythonファイルとして実行する．`iroha`ディレクトリ下で以下を実行する．
+まずは，通常のPythonファイルとして実行してみましょう．`takuhai`ディレクトリに移動して，以下を実行します．
 
 ```bash
-(iroha) > python main.py add
-5
-(iroha) > python main.py sub
-1
+(takuhai) > cd takuhai
+(takuhai) > python main.py
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
+（後略）
 ```
 
-ここで，`main.py`は`iroha`パッケージの中の`main.py`としてではなく，単なる一つのPythonスクリプトとして実行されている．
+ここで，`main.py`は`takuhai`パッケージの中の`main.py`としてではなく，単なる一つのPythonスクリプトとして実行されています．
 
-`setup.py`で指定しておいた実行コマンドも使えるようになっている．
+`setup.py`で指定しておいた実行コマンドも使えるようになっています．
 
 ```bash
-(iroha) > iroha add
-5
-(iroha) > iroha sub
-1
+(takuhai) > takuhai
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
+（後略）
 ```
 
 上のコマンドの実行ファイルは，
 
 ```
-C:\Users\daizu\Miniconda3\envs\iroha\Scripts\iroha.exe
+C:\Users\daizu\Miniconda3\envs\takuhai\Scripts\takuhai.exe
 ```
 
-である．試しにアンインストールしてみよう．
+です．試しにアンインストールしてみましょう．
 
 ```bash
-(iroha) > pip uninstall iroha
+(takuhai) > pip uninstall takuhai
 ```
 
-上記`iroha.exe`が勝手に消去されるのが分かる．
+上記の`takuhai.exe`が消去されるのが分かると思います．
 
-別のPythonプログラムから`iroha`パッケージを使うこともできる．
+別のPythonプログラムから`takuhai`パッケージを使うこともできます．
 
 ```python
-(iroha) > python
->>> import iroha
->>> iroha.__file__
-'C:\\Users\\daizu\\Python\\iroha\\iroha\\__init__.py'
+(takuhai) > python
+>>> import takuhai
+>>> takuhai.__file__
+'c:\\users\\daizu\\documents\\github\\takuhai\\takuhai\\__init__.py'
 ```
 
-インストールといっても，今回は作業用にインストールしたので，別の場所にコピーが作成されているのではなく，`iroha`ディレクトリ以下の元のファイルがそのまま使われている．`sys.path`を見てみよう．
+インストールといっても，今回は作業用にインストールしたので，別の場所にコピーが作られているわけではありません．`takuhai`ディレクトリ以下のファイルがそのまま使われています．`sys.path`を見てみましょう．
 
 ```python
 >>> import sys
 >>> for path in sys.path:
 ...     print(path)
 
-C:\Users\daizu\Miniconda3\envs\iroha\python36.zip
-C:\Users\daizu\Miniconda3\envs\iroha\DLLs
-C:\Users\daizu\Miniconda3\envs\iroha\lib
-C:\Users\daizu\Miniconda3\envs\iroha
-C:\Users\daizu\Miniconda3\envs\iroha\lib\site-packages
-c:\users\daizu\python\iroha
+C:\Users\daizu\Miniconda3\envs\takuhai\python36.zip
+C:\Users\daizu\Miniconda3\envs\takuhai\DLLs
+C:\Users\daizu\Miniconda3\envs\takuhai\lib
+C:\Users\daizu\Miniconda3\envs\takuhai
+C:\Users\daizu\Miniconda3\envs\takuhai\lib\site-packages
+c:\users\daizu\documents\github\takuhai
 ```
 
-`sys.path`の最後に作業ディレクトリが追加されている．先ほどと同じように`iroha`パッケージをアンインストールすると，`sys.path`から`iroha`パッケージへの参照がなくなる．
+`sys.path`の最後に作業ディレクトリが追加されています．先ほどと同じように`takuhai`パッケージをアンインストールすると，`sys.path`から`takuhai`パッケージへの参照がなくなります．
