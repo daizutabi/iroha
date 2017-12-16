@@ -167,25 +167,25 @@
 <h2 id="_3">設定ファイルの作成</h2>
 <p>パッケージをインストールするために必要な設定ファイルを作成していきましょう．詳しくは，<a href="http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/index.html">「Python Packaging User Guide」</a>の<a href="http://python-packaging-user-guide-ja.readthedocs.io/ja/latest/distributing.html">「プロジェクトのパッケージングと配布」</a>を参照してください．まずは必須となる<a href="https://github.com/daizutabi/takuhai/blob/master/setup.py"><code>setup.py</code></a>を準備しました．<code>setup.py</code>は<code>takuhai</code>レポジトリの直下に置きます．</p>
 <h2 id="_4">作業用にインストール</h2>
-<p>ここまで準備できたら，パッケージとしてインストールすることができます．<code>setup.py</code>があるディレクトリで以下を実行します．オプション<code>-e</code>をつけることで，「編集可能」な作業用としてインストールします．</p>
+<p>ここまで準備できたら，パッケージをインストールすることができます．<code>setup.py</code>があるディレクトリで以下を実行します．オプション<code>-e</code>をつけることで，「編集可能」な作業用としてインストールします．</p>
 <pre><code class="bash">(takuhai) &gt; pip install -e .
 </code></pre>
 
-<p>まずは，通常のPythonファイルとして実行してみましょう．<code>takuhai</code>ディレクトリに移動して，以下を実行します．</p>
+<p><code>takuhai</code>パッケージの中の<code>main.py</code>を実行してみます．</p>
 <pre><code class="bash">(takuhai) &gt; cd takuhai
 (takuhai) &gt; python main.py
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 （後略）
 </code></pre>
 
-<p>ここで，<code>main.py</code>は<code>takuhai</code>パッケージの中の<code>main.py</code>としてではなく，単なる一つのPythonスクリプトとして実行されています．</p>
+<p><code>main.py</code>は<code>takuhai</code>パッケージの中の<code>main.py</code>としてではなく，単なる一つのPythonスクリプトとして実行されていることに留意しましょう．</p>
 <p><code>setup.py</code>で指定しておいた実行コマンドも使えるようになっています．</p>
 <pre><code class="bash">(takuhai) &gt; takuhai
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 （後略）
 </code></pre>
 
-<p>上のコマンドの実行ファイルは，</p>
+<p>コマンド<code>takuhai</code>の実行ファイルは，</p>
 <pre><code>C:\Users\daizu\Miniconda3\envs\takuhai\Scripts\takuhai.exe
 </code></pre>
 
