@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//environment/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//project/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//pypi/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//local-test/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//ci-test/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://iroha.daizutabi.net//anaconda/</loc>
+     <lastmod>2017-12-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

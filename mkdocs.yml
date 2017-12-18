@@ -1,13 +1,11 @@
 site_name: Pythonパッケージの作り方
-site_url: https://daizutabi.github.io/takuhai/
-repo_url: https://github.com/daizutabi/takuhai/
+site_url: https://iroha.daizutabi.net/
+repo_url: https://github.com/daizutabi/iroha/
 edit_uri: ''
 
 theme:
   name: readthedocs
   language: 'jp'
-docs_dir: sources
-site_dir: docs
 
 extra:
   search:
@@ -15,10 +13,6 @@ extra:
 
 markdown_extensions:
   - admonition
-
-google_analytics:
-  - 'UA-110929554-1'
-  - 'auto'
 
 pages:
   - Home: index.md
