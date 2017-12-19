@@ -42,18 +42,15 @@ Travis CIの`takuhai`プロジェクトページを開きます．ローカルPC
 ビルドに成功したのでGitHubレポジトリのREADMEにバッジをつけましょう．あわせてPyPIのバッジもつけておきます．`README.md`を以下の内容で保存します．
 
 ```markdown
-# takuhai Project
-
-Pelican converter and server
+# Takuhai Project
 
 ---
-
-[![PyPI Version][pypi-v-image]][pypi-v-link]
+[![PyPI version][pypi-image]][pypi-link]
 [![Travis][travis-image]][travis-link]
 
-[pypi-v-image]: https://img.shields.io/pypi/v/takuhai.png
-[pypi-v-link]: https://pypi.python.org/pypi/takuhai
-[travis-image]: https://img.shields.io/travis/daizutabi/takuhai.svg?style=flat-square&label=Travis+CI
+[pypi-image]: https://badge.fury.io/py/takuhai.svg
+[pypi-link]: https://pypi.org/project/takuhai
+[travis-image]: https://travis-ci.org/daizutabi/takuhai.svg?branch=master
 [travis-link]: https://travis-ci.org/daizutabi/takuhai
 ```
 
