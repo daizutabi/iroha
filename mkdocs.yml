@@ -5,7 +5,7 @@ edit_uri: ''
 
 theme:
   name: readthedocs
-  language: 'jp'
+  language: 'ja'
 
 extra:
   search:
